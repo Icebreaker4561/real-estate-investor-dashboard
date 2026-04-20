@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/georgia", "destination": "/georgia_rental_dashboard.html" }
+  ]
+}
