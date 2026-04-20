@@ -3,91 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Real Estate Investor Dashboard — Испания & Грузия 2024–2025</title>
+<title>Инвестиции в аренду Испании — Аналитика 2024</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
 <style>
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-.app-header { background: #111; padding: 16px 24px; display: flex; align-items: center; gap: 24px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-.app-title { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 13px; font-weight: 700; color: #aaa; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
-.tab-nav { display: flex; gap: 4px; }
-.tab-btn { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; font-weight: 600; padding: 8px 20px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.15s; background: #2a2a2a; color: #888; display: flex; align-items: center; gap: 8px; }
-.tab-btn .flag { font-size: 18px; }
-.tab-btn:hover { background: #3a3a3a; color: #ccc; }
-.tab-btn.active-spain { background: #c9502a; color: #fff; }
-.tab-btn.active-georgia { background: #0f3460; color: #fff; }
-.tab-pane { display: none; }
-.tab-pane.active { display: block; }
-a.src-chip { color: #2a5a9a; text-decoration: underline; text-underline-offset: 2px; margin-right: 4px; font-size: 11px; white-space: nowrap; }
-a.src-chip::after { content: ' ↗'; font-size: 9px; color: #888; text-decoration: none; display: inline-block; }
-a.src-chip:hover { color: #c9502a; }
-.fr-g { color: #2d7a2d; } .fr-y { color: #e07020; } .fr-o { color: #a04020; } .fr-r { color: #900; }
-@media (max-width: 480px) {
-  .app-header { padding: 10px 12px; gap: 10px; }
-  .app-title { font-size: 10px; letter-spacing: 0.5px; }
-  .tab-btn { font-size: 13px; padding: 7px 14px; gap: 6px; }
-  .tab-btn .flag { font-size: 16px; }
-}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0ede8; color: #1a1a1a; }
 
-
-* { box-sizing: border-box; margin: 0; padding: 0; }.pane-spain { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0ede8; color: #1a1a1a; }.pane-spain header {
+header {
   background: linear-gradient(135deg, #b84020 0%, #c9502a 60%, #d96a3a 100%);
   color: white;
   padding: 28px 32px 24px;
-}.pane-spain header .tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; }.pane-spain header h1 { font-size: 26px; font-weight: 800; line-height: 1.2; }.pane-spain header .subtitle { font-size: 14px; opacity: 0.85; margin-top: 8px; line-height: 1.5; max-width: 700px; }.pane-spain header .source { font-size: 11px; opacity: 0.6; margin-top: 10px; }.pane-spain .kpi-strip {
+}
+header .tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-bottom: 8px; }
+header h1 { font-size: 26px; font-weight: 800; line-height: 1.2; }
+header .subtitle { font-size: 14px; opacity: 0.85; margin-top: 8px; line-height: 1.5; max-width: 700px; }
+header .source { font-size: 11px; opacity: 0.6; margin-top: 10px; }
+
+.kpi-strip {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   background: #1a1a1a;
-}.pane-spain .kpi-cell { padding: 18px 20px; border-right: 1px solid #333; }.pane-spain .kpi-cell:last-child { border-right: none; }.pane-spain .kpi-cell .val { font-size: 30px; font-weight: 900; color: #f08050; line-height: 1; }.pane-spain .kpi-cell .lbl { font-size: 11px; color: #aaa; margin-top: 5px; line-height: 1.3; }.pane-spain .kpi-cell .sub { font-size: 10px; color: #666; margin-top: 4px; }.pane-spain .section-hdr {
+}
+.kpi-cell { padding: 18px 20px; border-right: 1px solid #333; }
+.kpi-cell:last-child { border-right: none; }
+.kpi-cell .val { font-size: 30px; font-weight: 900; color: #f08050; line-height: 1; }
+.kpi-cell .lbl { font-size: 11px; color: #aaa; margin-top: 5px; line-height: 1.3; }
+.kpi-cell .sub { font-size: 10px; color: #666; margin-top: 4px; }
+
+.section-hdr {
   padding: 32px 32px 0;
   display: flex;
   align-items: center;
   gap: 12px;
-}.pane-spain .section-hdr .num {
+}
+.section-hdr .num {
   width: 32px; height: 32px;
   background: #c9502a; color: white;
   font-size: 14px; font-weight: 800;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-}.pane-spain .section-hdr h2 { font-size: 18px; font-weight: 800; }.pane-spain .section-hdr .desc { font-size: 12px; color: #888; margin-left: auto; max-width: 400px; text-align: right; line-height: 1.4; }.pane-spain .chart-wrap {
+}
+.section-hdr h2 { font-size: 18px; font-weight: 800; }
+.section-hdr .desc { font-size: 12px; color: #888; margin-left: auto; max-width: 400px; text-align: right; line-height: 1.4; }
+
+.chart-wrap {
   margin: 20px 32px;
   background: white;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}.pane-spain .chart-header { padding: 20px 24px 16px; border-bottom: 1px solid #f0ebe6; }.pane-spain .chart-header h3 { font-size: 15px; font-weight: 700; }.pane-spain .method {
+}
+.chart-header { padding: 20px 24px 16px; border-bottom: 1px solid #f0ebe6; }
+.chart-header h3 { font-size: 15px; font-weight: 700; }
+.method {
   font-size: 11px; color: #999; line-height: 1.5;
   padding: 8px 10px;
   background: #fafaf8;
   border-left: 3px solid #ddd;
   border-radius: 0 4px 4px 0;
   margin-top: 10px;
-}.pane-spain .chart-body { padding: 20px 24px; }.pane-spain .chart-body canvas { width: 100% !important; }.pane-spain .insight-box {
+}
+.chart-body { padding: 20px 24px; }
+.chart-body canvas { width: 100% !important; }
+
+.insight-box {
   margin: 0 24px 20px;
   border-radius: 8px;
   padding: 14px 18px;
   display: flex;
   gap: 14px;
   align-items: flex-start;
-}.pane-spain .insight-box.green { background: #f0f9f0; border: 1px solid #a8d8a8; }.pane-spain .insight-box.orange { background: #fff4ef; border: 1px solid #f0c0a0; }.pane-spain .insight-box.blue { background: #eff5fc; border: 1px solid #a0c0e8; }.pane-spain .insight-box .icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }.pane-spain .insight-box .text h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }.pane-spain .insight-box.green .text h4 { color: #2d7a2d; }.pane-spain .insight-box.orange .text h4 { color: #c9502a; }.pane-spain .insight-box.blue .text h4 { color: #2a5a9a; }.pane-spain .insight-box .text p { font-size: 13px; line-height: 1.6; color: #333; }.pane-spain .two-col {
+}
+.insight-box.green { background: #f0f9f0; border: 1px solid #a8d8a8; }
+.insight-box.orange { background: #fff4ef; border: 1px solid #f0c0a0; }
+.insight-box.blue { background: #eff5fc; border: 1px solid #a0c0e8; }
+.insight-box .icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+.insight-box .text h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+.insight-box.green .text h4 { color: #2d7a2d; }
+.insight-box.orange .text h4 { color: #c9502a; }
+.insight-box.blue .text h4 { color: #2a5a9a; }
+.insight-box .text p { font-size: 13px; line-height: 1.6; color: #333; }
+
+.two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 20px 32px;
   gap: 0;
-}.pane-spain .two-col .chart-wrap { margin: 0; }.pane-spain .two-col .chart-wrap:first-child { border-radius: 12px 0 0 12px; border-right: 1px solid #f0ede8; }.pane-spain .two-col .chart-wrap:last-child { border-radius: 0 12px 12px 0; }.pane-spain .city-table { width: 100%; border-collapse: collapse; font-size: 13px; }.pane-spain .city-table th { background: #f8f5f2; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #888; padding: 10px 14px; text-align: left; border-bottom: 2px solid #eee; }.pane-spain .city-table td { padding: 11px 14px; border-bottom: 1px solid #f5f0ec; vertical-align: middle; }.pane-spain .city-table tr:last-child td { border-bottom: none; }.pane-spain .city-table tr:hover td { background: #fdf8f5; }.pane-spain .city-table .city-name { font-weight: 600; }.pane-spain .rating { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; }.pane-spain .rating.hot { background: #fef0e8; color: #c9502a; }.pane-spain .rating.good { background: #f0f9f0; color: #2d7a2d; }.pane-spain .rating.ok { background: #f5f5f5; color: #666; }.pane-spain .bar-mini { display: inline-block; height: 8px; border-radius: 4px; background: #c9502a; vertical-align: middle; margin-right: 8px; }.pane-spain .supply-demand {
+}
+.two-col .chart-wrap { margin: 0; }
+.two-col .chart-wrap:first-child { border-radius: 12px 0 0 12px; border-right: 1px solid #f0ede8; }
+.two-col .chart-wrap:last-child { border-radius: 0 12px 12px 0; }
+
+.city-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.city-table th { background: #f8f5f2; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #888; padding: 10px 14px; text-align: left; border-bottom: 2px solid #eee; }
+.city-table td { padding: 11px 14px; border-bottom: 1px solid #f5f0ec; vertical-align: middle; }
+.city-table tr:last-child td { border-bottom: none; }
+.city-table tr:hover td { background: #fdf8f5; }
+.city-table .city-name { font-weight: 600; }
+.rating { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; }
+.rating.hot { background: #fef0e8; color: #c9502a; }
+.rating.good { background: #f0f9f0; color: #2d7a2d; }
+.rating.ok { background: #f5f5f5; color: #666; }
+.bar-mini { display: inline-block; height: 8px; border-radius: 4px; background: #c9502a; vertical-align: middle; margin-right: 8px; }
+
+.supply-demand {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   padding: 20px 24px;
-}.pane-spain .sd-card { text-align: center; padding: 20px 16px; border-radius: 8px; }.pane-spain .sd-card.demand { background: #fff4ef; border: 1px solid #f0c0a0; }.pane-spain .sd-card.supply { background: #f0f9f0; border: 1px solid #a8d8a8; }.pane-spain .sd-card.gap { background: #1a1a1a; }.pane-spain .sd-card .n { font-size: 32px; font-weight: 900; line-height: 1; margin-bottom: 6px; }.pane-spain .sd-card.demand .n { color: #c9502a; }.pane-spain .sd-card.supply .n { color: #2d7a2d; }.pane-spain .sd-card.gap .n { color: #f08050; }.pane-spain .sd-card .l { font-size: 12px; line-height: 1.4; }.pane-spain .sd-card.demand .l { color: #a04020; }.pane-spain .sd-card.supply .l { color: #2d7a2d; }.pane-spain .sd-card.gap .l { color: #aaa; }.pane-spain .sd-card .arrow { font-size: 28px; margin-bottom: 8px; }.pane-spain footer {
+}
+.sd-card { text-align: center; padding: 20px 16px; border-radius: 8px; }
+.sd-card.demand { background: #fff4ef; border: 1px solid #f0c0a0; }
+.sd-card.supply { background: #f0f9f0; border: 1px solid #a8d8a8; }
+.sd-card.gap { background: #1a1a1a; }
+.sd-card .n { font-size: 32px; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+.sd-card.demand .n { color: #c9502a; }
+.sd-card.supply .n { color: #2d7a2d; }
+.sd-card.gap .n { color: #f08050; }
+.sd-card .l { font-size: 12px; line-height: 1.4; }
+.sd-card.demand .l { color: #a04020; }
+.sd-card.supply .l { color: #2d7a2d; }
+.sd-card.gap .l { color: #aaa; }
+.sd-card .arrow { font-size: 28px; margin-bottom: 8px; }
+
+footer {
   text-align: center;
   padding: 32px;
   font-size: 11px;
   color: #999;
   line-height: 1.8;
-}.pane-spain /* Sources block (under each chart method) */
+}
+
+/* Sources block (under each chart method) */
 .src-row {
   padding: 8px 20px 12px;
   border-top: 1px dashed #e8e0d6;
@@ -95,46 +144,81 @@ a.src-chip:hover { color: #c9502a; }
   color: #777;
   line-height: 1.7;
   background: #fbf7f3;
-}.pane-spain .src-row strong { color: #555; font-size: 10.5px; margin-right: 4px; }.pane-spain .src-chip {
+}
+.src-row strong { color: #555; font-size: 10.5px; margin-right: 4px; }
+.src-chip {
   color: #2a5a9a;
   text-decoration: underline;
   text-underline-offset: 2px;
   margin-right: 4px;
   font-size: 11px;
   white-space: nowrap;
-}.pane-spain .src-chip::after { content: ' ↗'; font-size: 9px; color: #888; text-decoration: none; display: inline-block; }.pane-spain .src-chip:hover { color: #c9502a; }.pane-spain .src-chip + .src-chip::before { content: '·'; margin-right: 4px; color: #bbb; text-decoration: none; }.pane-spain .src-chip .fr { font-weight: 700; margin-left: 4px; font-size: 10px; text-decoration: none; display: inline-block; }.pane-spain .fr-g { color: #2d7a2d; }.pane-spain /* зелёный — свежее */
-.fr-y { color: #e07020; }.pane-spain /* жёлтый — актуальное */
-.fr-o { color: #a04020; }.pane-spain /* оранжевый — стареет */
-.fr-r { color: #900; }.pane-spain /* красный — устаревшее */
+}
+.src-chip::after { content: ' ↗'; font-size: 9px; color: #888; text-decoration: none; display: inline-block; }
+.src-chip:hover { color: #c9502a; }
+.src-chip + .src-chip::before { content: '·'; margin-right: 4px; color: #bbb; text-decoration: none; }
+.src-chip .fr { font-weight: 700; margin-left: 4px; font-size: 10px; text-decoration: none; display: inline-block; }
+.fr-g { color: #2d7a2d; } /* зелёный — свежее */
+.fr-y { color: #e07020; } /* жёлтый — актуальное */
+.fr-o { color: #a04020; } /* оранжевый — стареет */
+.fr-r { color: #900; }     /* красный — устаревшее */
 .src-legend {
   background: #f0ede8; padding: 14px 20px; border-radius: 8px;
   font-size: 11.5px; line-height: 1.6; color: #555; margin: 16px 0;
 }
 
-@media (max-width: 800px) {.pane-spain .kpi-strip { grid-template-columns: repeat(2, 1fr); }.pane-spain .two-col { grid-template-columns: 1fr; }.pane-spain .two-col .chart-wrap:first-child { border-radius: 12px 12px 0 0; border-right: none; border-bottom: 1px solid #f0ede8; }.pane-spain .two-col .chart-wrap:last-child { border-radius: 0 0 12px 12px; }.pane-spain .section-hdr { padding: 24px 16px 0; flex-wrap: wrap; }.pane-spain .section-hdr .desc { display: none; }.pane-spain .chart-wrap { margin: 16px; }.pane-spain .supply-demand { grid-template-columns: 1fr; }.pane-spain header { padding: 20px; }.pane-spain header h1 { font-size: 20px; }
+@media (max-width: 800px) {
+  .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+  .two-col { grid-template-columns: 1fr; }
+  .two-col .chart-wrap:first-child { border-radius: 12px 12px 0 0; border-right: none; border-bottom: 1px solid #f0ede8; }
+  .two-col .chart-wrap:last-child { border-radius: 0 0 12px 12px; }
+  .section-hdr { padding: 24px 16px 0; flex-wrap: wrap; }
+  .section-hdr .desc { display: none; }
+  .chart-wrap { margin: 16px; }
+  .supply-demand { grid-template-columns: 1fr; }
+  header { padding: 20px; }
+  header h1 { font-size: 20px; }
 }
 
-@media (max-width: 480px) {.pane-spain { font-size: 13px; }.pane-spain header { padding: 14px 14px 12px; }.pane-spain header .tag { font-size: 9px; }.pane-spain header h1 { font-size: 18px; font-weight: 700; }.pane-spain header .subtitle { font-size: 12px; margin-top: 6px; }.pane-spain header .source { font-size: 10px; }.pane-spain .kpi-strip { grid-template-columns: repeat(2, 1fr); }.pane-spain .kpi-cell { padding: 10px 12px; }.pane-spain .kpi-cell .val { font-size: 22px; }.pane-spain .kpi-cell .lbl { font-size: 10px; }.pane-spain .kpi-cell .sub { font-size: 9px; }.pane-spain .section-hdr { padding: 16px 12px 0; gap: 8px; }.pane-spain .section-hdr .num { width: 26px; height: 26px; font-size: 12px; }.pane-spain .section-hdr h2 { font-size: 15px; }.pane-spain .chart-wrap { margin: 10px 10px; border-radius: 10px; }.pane-spain .chart-header { padding: 12px 14px 10px; }.pane-spain .chart-header h3 { font-size: 13px; }.pane-spain .chart-body { padding: 10px 12px; }.pane-spain .insight-box { margin: 0 10px 12px; padding: 10px 12px; gap: 8px; }.pane-spain .insight-box .icon { font-size: 18px; }.pane-spain .insight-box .text p { font-size: 12px; }.pane-spain .insight-box .text h4 { font-size: 11px; }.pane-spain .method { font-size: 10px; }.pane-spain .src-legend { font-size: 10.5px; padding: 10px 14px; }.pane-spain table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }.pane-spain th { font-size: 11px; padding: 6px 8px; }.pane-spain td { font-size: 12px; padding: 5px 8px; }.pane-spain [style*="grid-template-columns:1fr 1fr"], .pane-spain [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }.pane-spain [style*="grid-template-columns:1fr 1fr 1fr"], .pane-spain [style*="grid-template-columns: 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }.pane-spain [style*="grid-template-columns:1.1fr 1fr"], .pane-spain [style*="grid-template-columns: 1.1fr 1fr"] { grid-template-columns: 1fr !important; }
+@media (max-width: 480px) {
+  body { font-size: 13px; }
+  header { padding: 14px 14px 12px; }
+  header .tag { font-size: 9px; }
+  header h1 { font-size: 18px; font-weight: 700; }
+  header .subtitle { font-size: 12px; margin-top: 6px; }
+  header .source { font-size: 10px; }
+  .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+  .kpi-cell { padding: 10px 12px; }
+  .kpi-cell .val { font-size: 22px; }
+  .kpi-cell .lbl { font-size: 10px; }
+  .kpi-cell .sub { font-size: 9px; }
+  .section-hdr { padding: 16px 12px 0; gap: 8px; }
+  .section-hdr .num { width: 26px; height: 26px; font-size: 12px; }
+  .section-hdr h2 { font-size: 15px; }
+  .chart-wrap { margin: 10px 10px; border-radius: 10px; }
+  .chart-header { padding: 12px 14px 10px; }
+  .chart-header h3 { font-size: 13px; }
+  .chart-body { padding: 10px 12px; }
+  .insight-box { margin: 0 10px 12px; padding: 10px 12px; gap: 8px; }
+  .insight-box .icon { font-size: 18px; }
+  .insight-box .text p { font-size: 12px; }
+  .insight-box .text h4 { font-size: 11px; }
+  .method { font-size: 10px; }
+  .src-legend { font-size: 10.5px; padding: 10px 14px; }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+  th { font-size: 11px; padding: 6px 8px; }
+  td { font-size: 12px; padding: 5px 8px; }
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns:1fr 1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns:1.1fr 1fr"],
+  [style*="grid-template-columns: 1.1fr 1fr"] { grid-template-columns: 1fr !important; }
 }
-
-
-* { box-sizing: border-box; margin: 0; padding: 0; }.pane-georgia { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f9; color: #222; font-size: 14px; }.pane-georgia h1 { font-size: 22px; font-weight: 700; }.pane-georgia h2 { font-size: 17px; font-weight: 600; margin-bottom: 10px; color: #1a1a2e; }.pane-georgia h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: #333; }.pane-georgia header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 20px 24px 16px; }.pane-georgia header p { font-size: 12px; color: #aac; margin-top: 4px; }.pane-georgia .flag { font-size: 28px; margin-right: 8px; vertical-align: middle; }.pane-georgia .kpi-strip { display: flex; flex-wrap: wrap; gap: 10px; background: #fff; padding: 16px 24px; border-bottom: 1px solid #e0e0e0; }.pane-georgia .kpi { flex: 1 1 140px; min-width: 120px; }.pane-georgia .kpi-label { font-size: 11px; color: #666; margin-bottom: 2px; }.pane-georgia .kpi-val { font-size: 22px; font-weight: 700; }.pane-georgia .kpi-sub { font-size: 11px; color: #888; }.pane-georgia .dot-g { color: #2d7a2d; }.pane-georgia .dot-o { color: #c9502a; }.pane-georgia .dot-b { color: #3b6fa0; }.pane-georgia .main { max-width: 1200px; margin: 0 auto; padding: 20px 16px; display: flex; flex-direction: column; gap: 20px; }.pane-georgia .section { background: #fff; border-radius: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); padding: 20px; }.pane-georgia .section-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #e8eaf0; display: flex; align-items: center; gap: 8px; }.pane-georgia .section-tag { font-size: 10px; background: #e8eaf0; color: #555; padding: 2px 8px; border-radius: 10px; font-weight: 500; }.pane-georgia .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }.pane-georgia .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-  @media (max-width: 700px) {.pane-georgia .grid-2, .pane-georgia .grid-3 { grid-template-columns: 1fr; } }
-
-  @media (max-width: 480px) {.pane-georgia { font-size: 13px; }.pane-georgia h1 { font-size: 18px; }.pane-georgia h2 { font-size: 15px; }.pane-georgia h3 { font-size: 13px; }.pane-georgia header { padding: 14px 14px 12px; }.pane-georgia header p { font-size: 11px; }.pane-georgia .flag { font-size: 20px; margin-right: 4px; }.pane-georgia .kpi-strip { padding: 10px 12px; gap: 6px; }.pane-georgia .kpi { flex: 1 1 120px; }.pane-georgia .kpi-val { font-size: 18px; }.pane-georgia .kpi-label { font-size: 10px; }.pane-georgia .kpi-sub { font-size: 10px; }.pane-georgia .main { padding: 10px 10px; gap: 12px; }.pane-georgia .section { padding: 14px 12px; border-radius: 8px; }.pane-georgia .section-title { font-size: 13px; gap: 6px; }.pane-georgia .section-tag { font-size: 9px; padding: 2px 6px; }.pane-georgia .chart-box canvas { max-height: 200px; }.pane-georgia .chart-box-tall canvas { max-height: 240px; }.pane-georgia table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }.pane-georgia th { font-size: 11px; padding: 7px 8px; }.pane-georgia td { font-size: 12px; padding: 6px 8px; }.pane-georgia .pro-con { grid-template-columns: 1fr; }.pane-georgia .pro-col li, .pane-georgia .con-col li { font-size: 11px; }.pane-georgia .tax-highlight { font-size: 22px; }.pane-georgia .tax-card { padding: 10px 8px; }.pane-georgia .callout { font-size: 12px; padding: 8px 10px; }.pane-georgia .city-card { padding: 12px 10px; }.pane-georgia .city-card h4 { font-size: 13px; }.pane-georgia .math-row { font-size: 12px; }.pane-georgia .badge { font-size: 10px; padding: 2px 6px; }.pane-georgia .src-row { font-size: 10px; }.pane-georgia footer { font-size: 10px; padding: 14px; }
-  }.pane-georgia .chart-box { position: relative; }.pane-georgia .chart-box canvas { max-height: 260px; }.pane-georgia .chart-box-tall canvas { max-height: 340px; }.pane-georgia table { width: 100%; border-collapse: collapse; font-size: 13px; }.pane-georgia th { background: #f0f2f7; font-weight: 600; padding: 8px 10px; text-align: left; color: #333; }.pane-georgia td { padding: 7px 10px; border-bottom: 1px solid #f0f0f0; }.pane-georgia tr:hover td { background: #fafbff; }.pane-georgia .best { background: #e8f5e9 !important; font-weight: 600; }.pane-georgia .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }.pane-georgia .badge-g { background: #e8f5e9; color: #2d7a2d; }.pane-georgia .badge-o { background: #fff3e0; color: #e65100; }.pane-georgia .badge-b { background: #e3f2fd; color: #1565c0; }.pane-georgia .badge-r { background: #fce4ec; color: #c62828; }.pane-georgia .callout { background: #fff8e1; border-left: 4px solid #f9a825; padding: 10px 14px; border-radius: 4px; font-size: 13px; margin-bottom: 12px; }.pane-georgia .callout-green { background: #e8f5e9; border-left: 4px solid #2d7a2d; }.pane-georgia .callout-blue { background: #e3f2fd; border-left: 4px solid #1565c0; }.pane-georgia .callout-red { background: #fce4ec; border-left: 4px solid #c62828; }.pane-georgia .pro-con { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }.pane-georgia .pro-col { background: #e8f5e9; border-radius: 8px; padding: 12px; }.pane-georgia .con-col { background: #fce4ec; border-radius: 8px; padding: 12px; }.pane-georgia .pro-col h4, .pane-georgia .con-col h4 { font-size: 12px; font-weight: 700; margin-bottom: 6px; }.pane-georgia .pro-col h4 { color: #2d7a2d; }.pane-georgia .con-col h4 { color: #c62828; }.pane-georgia .pro-col li, .pane-georgia .con-col li { font-size: 12px; margin-left: 14px; margin-bottom: 3px; }.pane-georgia .src-row { margin-top: 10px; padding-top: 8px; border-top: 1px dashed #e0e0e0; font-size: 11px; color: #888; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }.pane-georgia .src-label { font-size: 10px; color: #aaa; margin-right: 2px; }.pane-georgia a.src-chip { color: #2a5a9a; text-decoration: underline; text-underline-offset: 2px; margin-right: 4px; font-size: 11px; white-space: nowrap; }.pane-georgia a.src-chip::after { content: ' ↗'; font-size: 9px; color: #888; }.pane-georgia a.src-chip:hover { color: #c9502a; }.pane-georgia .fr-g { background: #e8f5e9; color: #2d7a2d; padding: 1px 5px; border-radius: 8px; font-size: 10px; }.pane-georgia .fr-y { background: #fff8e1; color: #f57f17; padding: 1px 5px; border-radius: 8px; font-size: 10px; }.pane-georgia .fr-o { background: #fff3e0; color: #e65100; padding: 1px 5px; border-radius: 8px; font-size: 10px; }.pane-georgia .fr-r { background: #fce4ec; color: #c62828; padding: 1px 5px; border-radius: 8px; font-size: 10px; }.pane-georgia .tax-highlight { font-size: 28px; font-weight: 800; color: #2d7a2d; display: block; }.pane-georgia .tax-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px; text-align: center; }.pane-georgia .tax-card .label { font-size: 11px; color: #666; margin-top: 4px; }.pane-georgia .city-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px; }.pane-georgia .city-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }.pane-georgia .math-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #eee; font-size: 13px; }.pane-georgia .math-row:last-child { border-bottom: none; font-weight: 700; color: #2d7a2d; }.pane-georgia footer { text-align: center; padding: 20px; color: #aaa; font-size: 11px; }
-
 </style>
 </head>
 <body>
-<div class="app-header">
-  <span class="app-title">Real Estate Investor</span>
-  <nav class="tab-nav">
-    <button class="tab-btn active-spain" onclick="switchTab('spain')"><span class="flag">🇪🇸</span> Испания</button>
-    <button class="tab-btn" onclick="switchTab('georgia')"><span class="flag">🇬🇪</span> Грузия</button>
-  </nav>
-</div>
-<div id="pane-spain" class="tab-pane pane-spain active">
+
 <header>
   <div class="tag">Аналитический дашборд · Banco de España 2024</div>
   <h1>Рынок аренды жилья Испании:<br>Руководство для инвестора</h1>
@@ -1832,1018 +1916,8 @@ a.src-chip:hover { color: #c9502a; }
   Данные: AEAT, INE, Eurostat, Colegio de Registradores, MITMA, OCDE · Период: 2004–2026<br><br>
   <em>Дашборд носит информационный характер и не является инвестиционной рекомендацией.</em>
 </footer>
-</div>
-<div id="pane-georgia" class="tab-pane pane-georgia">
-<header>
-  <h1><span class="flag">🇬🇪</span>Грузия — Рынок аренды для инвестора</h1>
-  <p>Актуальные данные 2024–2025 · Тбилиси · Батуми · Кутаиси · Источники: Galt&amp;Taggart, TBC Capital, Geostat.ge, AirDNA, Global Property Guide</p>
-</header>
 
-<!-- KPI STRIP -->
-<div class="kpi-strip">
-  <div class="kpi">
-    <div class="kpi-label">Средняя цена/м² Тбилиси</div>
-    <div class="kpi-val dot-b">$1 320</div>
-    <div class="kpi-sub">первичный рынок, +11.6% г/г</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Gross yield Тбилиси (LTR)</div>
-    <div class="kpi-val dot-g">7.8%</div>
-    <div class="kpi-sub">долгосрочная аренда, ср. по городу</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Gross yield Батуми (STR)</div>
-    <div class="kpi-val dot-g">10–18%</div>
-    <div class="kpi-sub">краткосрочная аренда, Airbnb</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Налог при покупке</div>
-    <div class="kpi-val dot-g">≈ 0%</div>
-    <div class="kpi-sub">только регистрация ~$100</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Налог на аренду</div>
-    <div class="kpi-val dot-g">5%</div>
-    <div class="kpi-sub">фиксированный, физлица</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Capital gains после 2 лет</div>
-    <div class="kpi-val dot-g">0%</div>
-    <div class="kpi-sub">полное освобождение</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Объём рынка 2024</div>
-    <div class="kpi-val dot-b">$4.3B</div>
-    <div class="kpi-sub">рекорд, +15% г/г</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Иностранные покупатели Батуми</div>
-    <div class="kpi-val dot-o">84%</div>
-    <div class="kpi-sub">от всех сделок в Батуми</div>
-  </div>
-</div>
-
-<div class="main">
-
-<!-- SECTION 1: WHY GEORGIA -->
-<div class="section">
-  <div class="section-title">1. Почему Грузия — инвест-кейс <span class="section-tag">ОБЗОР</span></div>
-  <div class="callout callout-green">
-    <strong>Ключевое преимущество:</strong> нулевой налог при покупке + 5% фикс на аренду + 0% capital gains после 2 лет = один из лучших налоговых режимов для инвестора в недвижимость в мире.
-  </div>
-  <div class="grid-2">
-    <div>
-      <div class="pro-con">
-        <div class="pro-col">
-          <h4>✅ Плюсы</h4>
-          <ul>
-            <li>Минимальные налоги на всех этапах</li>
-            <li>Иностранцы покупают наравне с гражданами</li>
-            <li>Рост цен +10–12% г/г при низкой базе</li>
-            <li>Батуми — туристический хаб (STR доходность 10–18%)</li>
-            <li>Тбилиси — растущий IT/экспат центр</li>
-            <li>Без ограничений на репатриацию прибыли</li>
-            <li>Цены в $ / аренда в $</li>
-          </ul>
-        </div>
-        <div class="con-col">
-          <h4>⚠️ Риски</h4>
-          <ul>
-            <li>Геополитическая нестабильность (сосед с Россией)</li>
-            <li>Рынок менее ликвиден, чем Западная Европа</li>
-            <li>Большой % иностранцев — риск перегрева Батуми</li>
-            <li>Ипотека дорогая: 13–15% в GEL</li>
-            <li>Политические риски (протесты 2024–2025)</li>
-            <li>Слабая институциональная защита арендодателя</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="chart-box">
-      <canvas id="marketSizeChart"></canvas>
-    </div>
-  </div>
-  <div class="src-row">
-    <span class="src-label">Источники:</span>
-    <a class="src-chip" href="https://orangegroup.ge/tbccapital2024/en">TBC Capital 2024</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://galtandtaggart.com/report/tbilisi-residential-real-estate-2024-full-year-overview/">Galt&Taggart 2024</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.globalpropertyguide.com/asia/georgia/taxes-and-costs">Global Property Guide</a><span class="fr-g">🟢</span>
-  </div>
-</div>
-
-<!-- SECTION 2: PRICES -->
-<div class="section">
-  <div class="section-title">2. Цены на квартиры: Тбилиси и Батуми <span class="section-tag">ЦЕНЫ</span></div>
-  <div class="grid-2">
-    <div>
-      <h3>Тбилиси — цена/м² по районам ($ USD)</h3>
-      <div class="chart-box" style="margin-bottom:16px">
-        <canvas id="tbilisiPricesChart"></canvas>
-      </div>
-    </div>
-    <div>
-      <h3>Батуми — цена/м² по зонам ($ USD)</h3>
-      <div class="chart-box">
-        <canvas id="batumiPricesChart"></canvas>
-      </div>
-    </div>
-  </div>
-  <div style="margin-top:16px">
-    <h3>Динамика роста цен, % г/г</h3>
-    <div class="chart-box" style="max-width:600px">
-      <canvas id="priceGrowthChart"></canvas>
-    </div>
-  </div>
-  <div class="callout" style="margin-top:12px">
-    <strong>Ценовой диапазон Тбилиси:</strong> от $650/м² (спальные районы — Глдани, Самгори) до $3 300/м² (Мтацминда, исторический центр). Для инвестора оптимальная зона: $900–1 400/м² (Сабуртало, Дидгори, Диди Дигоми) — лучшее соотношение цена/доходность.
-  </div>
-  <div class="src-row">
-    <span class="src-label">Источники:</span>
-    <a class="src-chip" href="https://galtandtaggart.com/report/tbilisi-residential-real-estate-2024-full-year-overview/">Galt&Taggart Full Year 2024</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://orangegroup.ge/tbccapital2024/en">TBC Capital 2024</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.geostat.ge/en/modules/categories/698/residential-property-price-index">Geostat RPPI</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://realting.com/news/how-much-does-housing-cost-in-tbilisi-and-batumi">Realting.com 2025</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://cushwake.ge/research-insights/georgias-economic-real-estate-trends-q1q2-2025/">Cushman & Wakefield H1 2025</a><span class="fr-g">🟢</span>
-  </div>
-</div>
-
-<!-- SECTION 3: RENTAL YIELDS -->
-<div class="section">
-  <div class="section-title">3. Доходность аренды: долгосрочная vs краткосрочная <span class="section-tag">ДОХОДНОСТЬ</span></div>
-  <div class="callout callout-blue">
-    <strong>Стратегия выбора:</strong> Тбилиси → долгосрочная аренда (стабильность, экспаты, IT), Батуми → краткосрочная (туристы, сезонность, 15–25% брутто на первой линии).
-  </div>
-  <div class="grid-2">
-    <div>
-      <h3>Gross yield по районам Тбилиси (LTR, %)</h3>
-      <div class="chart-box">
-        <canvas id="tbilisiYieldChart"></canvas>
-      </div>
-    </div>
-    <div>
-      <h3>LTR vs STR: сравнение по городам</h3>
-      <div class="chart-box">
-        <canvas id="geoYieldCompareChart"></canvas>
-      </div>
-    </div>
-  </div>
-  <div style="margin-top:16px">
-    <h3>Детальное сравнение LTR vs STR</h3>
-    <table>
-      <tr>
-        <th>Параметр</th>
-        <th>Долгосрочная (LTR) Тбилиси</th>
-        <th>Краткосрочная (STR) Тбилиси</th>
-        <th>Краткосрочная (STR) Батуми</th>
-      </tr>
-      <tr>
-        <td>Gross yield</td>
-        <td>6–8% (ср. 7.8%)</td>
-        <td>8–12%</td>
-        <td class="best">10–25%</td>
-      </tr>
-      <tr>
-        <td>Occupancy</td>
-        <td>95–98% (долгосрок)</td>
-        <td>47–63% (AirDNA)</td>
-        <td>54–57% (AirDNA)</td>
-      </tr>
-      <tr>
-        <td>Средний ADR</td>
-        <td>$10.6/м²/мес → ~$600–900/мес (50–85м²)</td>
-        <td>$42–51/ночь</td>
-        <td>$43–46/ночь</td>
-      </tr>
-      <tr>
-        <td>Средняя годовая выручка (квартира)</td>
-        <td>$7 200–10 800</td>
-        <td>~$9 000 (AirDNA)</td>
-        <td class="best">~$8 000–12 000</td>
-      </tr>
-      <tr>
-        <td>Управление</td>
-        <td>Низкие издержки</td>
-        <td>Нужен менеджер (10–20%)</td>
-        <td>Нужен менеджер (15–25%)</td>
-      </tr>
-      <tr>
-        <td>Регуляторный риск</td>
-        <td class="best">Минимальный</td>
-        <td>Средний (лицензии)</td>
-        <td>Средний (высокая конкуренция)</td>
-      </tr>
-      <tr>
-        <td>Налог на доход</td>
-        <td>5% (физлицо)</td>
-        <td>5% (физлицо)</td>
-        <td>5% (физлицо)</td>
-      </tr>
-    </table>
-  </div>
-  <div class="src-row">
-    <span class="src-label">Источники:</span>
-    <a class="src-chip" href="https://www.globalpropertyguide.com/asia/georgia/rental-yields">Global Property Guide yields</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.airdna.co/vacation-rental-data/app/ge/default/tbilisi/overview">AirDNA Тбилиси</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.airdna.co/vacation-rental-data/app/ge/default/batumi/overview">AirDNA Батуми</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://airbtics.com/annual-airbnb-revenue-in-tbilisi-georgia/">Airbtics Тбилиси</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://airbtics.com/annual-airbnb-revenue-in-batumi-georgia/">Airbtics Батуми</a><span class="fr-g">🟢</span>
-  </div>
-</div>
-
-<!-- SECTION 4: TAX REGIME -->
-<div class="section">
-  <div class="section-title">4. Налоговый режим — конкурентное преимущество Грузии <span class="section-tag">НАЛОГИ</span></div>
-  <div class="callout callout-green">
-    <strong>Грузия входит в топ-5 стран мира по инвест-дружественности налогов на недвижимость.</strong> Покупка без налога, аренда по 5%, продажа после 2 лет без налога.
-  </div>
-  <div class="grid-3" style="margin-bottom:16px">
-    <div class="tax-card">
-      <span class="tax-highlight">≈ 0%</span>
-      <div>Налог при покупке</div>
-      <div class="label">Только регистрация ~$50–100<br>Нет stamp duty, нет transfer tax</div>
-    </div>
-    <div class="tax-card">
-      <span class="tax-highlight">5%</span>
-      <div>Налог на аренду (жилая)</div>
-      <div class="label">Фиксированная ставка для физлиц<br>Без вычета расходов на 5%</div>
-    </div>
-    <div class="tax-card" style="background:#e8f5e9; border-color:#2d7a2d">
-      <span class="tax-highlight">0%</span>
-      <div>Capital gains после 2 лет</div>
-      <div class="label">Полное освобождение<br>При продаже до 2 лет — 5%</div>
-    </div>
-  </div>
-  <table>
-    <tr>
-      <th>Событие</th>
-      <th>Ставка</th>
-      <th>База</th>
-      <th>Примечание</th>
-    </tr>
-    <tr class="best">
-      <td>Покупка недвижимости</td>
-      <td>≈ 0%</td>
-      <td>—</td>
-      <td>Только регистрация в Доме юстиции ~50–100 GEL</td>
-    </tr>
-    <tr>
-      <td>НДС при покупке новостройки</td>
-      <td>0% для покупателя</td>
-      <td>—</td>
-      <td>НДС включён в цену застройщика</td>
-    </tr>
-    <tr>
-      <td>Аренда жилой недвижимости</td>
-      <td class="best">5%</td>
-      <td>Валовый доход</td>
-      <td>Фиксированная, без вычетов расходов</td>
-    </tr>
-    <tr>
-      <td>Аренда коммерческой недвижимости</td>
-      <td>20%</td>
-      <td>Чистый доход</td>
-      <td>Расходы вычитаются</td>
-    </tr>
-    <tr>
-      <td>Налог на имущество (ежегодно)</td>
-      <td>0–1%</td>
-      <td>Рыночная стоимость</td>
-      <td>0% если доход семьи &lt; 40 000 GEL/год (~$15K)</td>
-    </tr>
-    <tr class="best">
-      <td>Продажа после 2 лет владения</td>
-      <td>0%</td>
-      <td>Прирост стоимости</td>
-      <td>Полное освобождение от налога</td>
-    </tr>
-    <tr>
-      <td>Продажа до 2 лет владения</td>
-      <td>5%</td>
-      <td>Прирост стоимости</td>
-      <td>Только с прироста, не с полной суммы</td>
-    </tr>
-    <tr>
-      <td>Нерезидент — удержание при продаже</td>
-      <td>5% / 0%</td>
-      <td>Прирост стоимости</td>
-      <td>Те же правила, что для резидентов</td>
-    </tr>
-  </table>
-  <div class="src-row">
-    <span class="src-label">Источники:</span>
-    <a class="src-chip" href="https://expathub.ge/investing-in-georgia-taxes-and-other-costs-you-should-know-about-when-buying-property/">ExpatHub.ge Taxes Guide</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.globalpropertyguide.com/asia/georgia/taxes-and-costs">Global Property Guide Taxes</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://pbservices.ge/blog/individual-property-taxes-georgia-guide/">PB Services Tax Guide</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.mbany.com/en/blog/real-estate-taxes-in-georgia-what-an-investor-should-know">mbany.com Investor Taxes</a><span class="fr-y">🟡</span>
-    <a class="src-chip" href="https://taxsummaries.pwc.com/georgia/individual/other-taxes">PwC Tax Summaries Georgia</a><span class="fr-g">🟢</span>
-  </div>
-</div>
-
-<!-- SECTION 5: STR MARKET -->
-<div class="section">
-  <div class="section-title">5. Краткосрочная аренда: реальная статистика AirDNA / AirROI <span class="section-tag">ТУРИЗМ</span></div>
-
-  <div class="callout callout-red">
-    <strong>⚠️ Предупреждение об источниках:</strong> AirDNA считает ВСЕ листинги (включая неактивные). AirROI — строгое определение (все листинги / весь год). Airbtics — только реально бронируемые объекты. Три источника дают разные числа. Для инвестора наиболее консервативная (= реалистичная) оценка — AirROI.
-  </div>
-
-  <h3 style="margin-bottom:10px">Сравнение источников: occupancy и ADR</h3>
-  <table>
-    <tr>
-      <th>Источник</th>
-      <th>Тбилиси occupancy</th>
-      <th>Тбилиси ADR</th>
-      <th>Батуми occupancy</th>
-      <th>Батуми ADR</th>
-      <th>Методология</th>
-    </tr>
-    <tr>
-      <td><a class="src-chip" href="https://www.airdna.co/vacation-rental-data/app/ge/default/tbilisi/overview">AirDNA</a> <span class="fr-g">🟢 апр.2026</span></td>
-      <td>56%</td>
-      <td>$49.50</td>
-      <td>55%</td>
-      <td>$46.40</td>
-      <td>Среднее, все листинги</td>
-    </tr>
-    <tr>
-      <td><a class="src-chip" href="https://airbtics.com/annual-airbnb-revenue-in-tbilisi-georgia/">Airbtics</a> <span class="fr-g">🟢 янв.2026</span></td>
-      <td><strong>63%</strong></td>
-      <td>$42</td>
-      <td>53%</td>
-      <td>$43</td>
-      <td>Медиана, только бронируемые</td>
-    </tr>
-    <tr class="best">
-      <td><a class="src-chip" href="https://www.airroi.com/report/world/georgia/tbilisi/tbilisi">AirROI</a> <span class="fr-g">🟢 мар.2026</span></td>
-      <td><strong>40.9%</strong></td>
-      <td>$57</td>
-      <td><strong>35.5%</strong></td>
-      <td>$58</td>
-      <td>Все листинги вкл. неактивные — самая реалистичная оценка</td>
-    </tr>
-  </table>
-
-  <div class="grid-2" style="margin-top:16px">
-    <div>
-      <h3>ADR по перцентилям (Airbtics, янв 2026)</h3>
-      <div class="chart-box">
-        <canvas id="strMetricsChart"></canvas>
-      </div>
-    </div>
-    <div>
-      <h3>Листинги: всего vs активные (AirDNA vs AirROI)</h3>
-      <div class="chart-box">
-        <canvas id="strListingsChart"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <div style="margin-top:16px">
-    <h3>Выручка по перцентилям — Тбилиси (AirROI, апр.2025–мар.2026)</h3>
-    <table>
-      <tr><th>Перцентиль</th><th>Месячная выручка</th><th>Годовая выручка</th><th>ADR/ночь</th><th>Occupancy</th></tr>
-      <tr><td>Топ 10%</td><td>$1 626+</td><td>~$19 500+</td><td>$98+</td><td>84%+</td></tr>
-      <tr><td>Топ 25%</td><td>$1 024+</td><td>~$12 300+</td><td>$62+</td><td>69%+</td></tr>
-      <tr class="best"><td><strong>Медиана (50%)</strong></td><td>$584</td><td><strong>~$7 000</strong></td><td>$42</td><td>43%</td></tr>
-      <tr><td>Нижние 25%</td><td>$272</td><td>~$3 300</td><td>$30</td><td>20%</td></tr>
-    </table>
-    <div class="src-row">
-      <a class="src-chip" href="https://www.airroi.com/report/world/georgia/tbilisi/tbilisi">AirROI Тбилиси</a><span class="fr-g">🟢</span>
-      <a class="src-chip" href="https://airbtics.com/annual-airbnb-revenue-in-tbilisi-georgia/">Airbtics Тбилиси</a><span class="fr-g">🟢</span>
-    </div>
-  </div>
-
-  <div style="margin-top:16px">
-    <h3 style="color:#c62828">⚠️ Батуми: кризис перенасыщения + экстремальная сезонность</h3>
-    <div class="callout callout-red">
-      <strong>Листинги Батуми выросли +46.1% г/г, а occupancy упала на 5.4%.</strong> AirDNA фиксирует 9 369 листингов, но активны (хотя бы 1 бронирование/месяц) только 3 607 — т.е. 61% объектов де-факто не бронируются. Медианная годовая выручка (AirROI): <strong>$3 766/год</strong> — то есть многие объекты не окупают даже расходы на управление.
-    </div>
-    <h3>Сезонность Батуми (AirROI, апр.2025–мар.2026)</h3>
-    <div class="grid-2">
-      <div class="chart-box">
-        <canvas id="batumiSeasonChart"></canvas>
-      </div>
-      <div>
-        <table>
-          <tr><th>Период</th><th>Occupancy</th><th>ADR</th><th>Выручка/мес</th></tr>
-          <tr style="background:#e8f5e9"><td><strong>Август (пик)</strong></td><td><strong>48.8%</strong></td><td><strong>$67</strong></td><td><strong>$1 102</strong></td></tr>
-          <tr><td>Пик (июл–сен)</td><td>45.4%</td><td>$64</td><td>$957</td></tr>
-          <tr><td>Плечо (апр–май, окт)</td><td>~40%</td><td>$57</td><td>~$600</td></tr>
-          <tr style="background:#fce4ec"><td><strong>Март (дно)</strong></td><td><strong>28.6%</strong></td><td><strong>$54</strong></td><td><strong>$407</strong></td></tr>
-          <tr><td>Зима (янв–мар)</td><td>31.6%</td><td>$54</td><td>$433</td></tr>
-        </table>
-        <div style="margin-top:8px; font-size:12px; color:#555; background:#fff3e0; padding:8px; border-radius:4px; border-left:3px solid #e65100">
-          Разрыв пик/дно: выручка <strong>в 2.7 раза выше в августе</strong>. В ноябре–апреле многие хозяева переключаются на помесячную аренду.
-        </div>
-      </div>
-    </div>
-    <div class="src-row">
-      <a class="src-chip" href="https://www.airroi.com/report/world/georgia/autonomous-republic-of-adjara/batumi">AirROI Батуми</a><span class="fr-g">🟢</span>
-      <a class="src-chip" href="https://airbtics.com/annual-airbnb-revenue-in-batumi-georgia/">Airbtics Батуми</a><span class="fr-g">🟢</span>
-      <a class="src-chip" href="https://btuai.ge/en/batumis-seasonality-paradox-platforms-micro-apartments-and-informal-employment/">BTU AI — Парадокс сезонности Батуми</a><span class="fr-g">🟢</span>
-      <a class="src-chip" href="https://novaluxeconcierge.ge/short-term-rental-performance-in-batumi/">Nova Luxe — STR Батуми</a><span class="fr-g">🟢</span>
-    </div>
-  </div>
-
-  <div style="margin-top:16px">
-    <h3>ADR по районам Тбилиси (Airbtics, фев.2025–янв.2026)</h3>
-    <div class="chart-box" style="max-width:500px">
-      <canvas id="tbilisiNeighChart"></canvas>
-    </div>
-    <div class="src-row">
-      <a class="src-chip" href="https://airbtics.com/annual-airbnb-revenue-in-tbilisi-georgia/">Airbtics Тбилиси — по районам</a><span class="fr-g">🟢</span>
-    </div>
-  </div>
-
-  <div style="margin-top:16px">
-    <h3>Регуляторика STR в Грузии</h3>
-    <table>
-      <tr><th>Параметр</th><th>Статус</th><th>Примечание</th></tr>
-      <tr><td>Лицензия на STR</td><td><span class="badge badge-g">Не требуется</span></td><td>Регистрация как физлицо или ИП</td></tr>
-      <tr><td>Запрет Airbnb</td><td><span class="badge badge-g">Нет</span></td><td>Airbnb, Booking работают без ограничений</td></tr>
-      <tr><td>Лимит на ночи в год</td><td><span class="badge badge-g">Нет</span></td><td>Сдавать можно круглогодично</td></tr>
-      <tr><td>Согласие ТСЖ</td><td><span class="badge badge-o">Рекомендуется</span></td><td>Официально не требуется, но спорно</td></tr>
-      <tr><td>Налог на STR доход</td><td>5%</td><td>Те же условия, что для LTR</td></tr>
-    </table>
-  </div>
-</div>
-
-<!-- SECTION 6: SUPPLY & CONSTRUCTION -->
-<div class="section">
-  <div class="section-title">6. Строительство и предложение <span class="section-tag">СТРОИТЕЛЬСТВО</span></div>
-  <div class="grid-2">
-    <div>
-      <h3>Выданные разрешения на строительство (Грузия)</h3>
-      <div class="chart-box">
-        <canvas id="geoPermitsChart"></canvas>
-      </div>
-    </div>
-    <div>
-      <h3>Распределение рынка по городам 2024</h3>
-      <div class="chart-box">
-        <canvas id="marketShareChart"></canvas>
-      </div>
-    </div>
-  </div>
-  <div style="margin-top:14px">
-    <table>
-      <tr><th>Показатель</th><th>Значение</th><th>Источник</th><th>Дата</th></tr>
-      <tr><td>Разрешений выдано всего</td><td>12 080</td><td>Geostat.ge</td><td>2024</td></tr>
-      <tr><td>Рост разрешений г/г</td><td>+7.1%</td><td>Geostat.ge</td><td>2024</td></tr>
-      <tr><td>Площадь под разрешения</td><td>12 040 400 м²</td><td>Geostat.ge</td><td>2024</td></tr>
-      <tr><td>Рост площади г/г</td><td>+28.4%</td><td>Geostat.ge</td><td>2024</td></tr>
-      <tr><td>Доля Тбилиси в разрешениях</td><td>46.8%</td><td>Geostat.ge</td><td>2024</td></tr>
-      <tr><td>Завершённых объектов</td><td>3 604</td><td>Geostat.ge</td><td>2024</td></tr>
-      <tr><td>Рост завершённых г/г</td><td>+13.3%</td><td>Geostat.ge</td><td>2024</td></tr>
-      <tr><td>Объём рынка Тбилиси</td><td>39 600 сделок (+2.3%)</td><td>TBC Capital</td><td>2024</td></tr>
-      <tr><td>Совокупный объём рынка</td><td>$4.3 млрд (рекорд)</td><td>TBC Capital</td><td>2024</td></tr>
-    </table>
-  </div>
-  <div class="callout" style="margin-top:12px">
-    <strong>Вывод:</strong> Сильный рост разрешений (+28% по площади) при относительно скромном числе завершённых объектов (3 604) указывает на строительный бум с отложенным вводом в эксплуатацию 2025–2026. Риск: рост предложения через 2–3 года может сдержать доходность.
-  </div>
-  <div class="src-row">
-    <span class="src-label">Источники:</span>
-    <a class="src-chip" href="https://www.geostat.ge/en/modules/categories/621/information-about-permissions-granted-for-construction-and-completed-objects">Geostat — Разрешения на строительство</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://orangegroup.ge/tbccapital2024/en">TBC Capital Annual 2024</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://btuai.ge/en/construction-sector-in-georgia-2024-statistics-and-challenges/">BTU AI — Строительный сектор 2024</a><span class="fr-g">🟢</span>
-  </div>
-</div>
-
-<!-- SECTION 7: FOREIGN BUYERS -->
-<div class="section">
-  <div class="section-title">7. Иностранные покупатели <span class="section-tag">ИНОСТРАНЦЫ</span></div>
-  <div class="grid-2">
-    <div>
-      <h3>Доля иностранцев в сделках, %</h3>
-      <div class="chart-box">
-        <canvas id="foreignBuyersChart"></canvas>
-      </div>
-    </div>
-    <div>
-      <h3>Топ-национальности покупателей</h3>
-      <div style="margin-top:8px">
-        <div class="callout callout-blue">
-          <strong>Тбилиси:</strong> ~21% сделок — иностранцы. Россияне (особенно с 2022), казахстанцы, израильтяне, граждане ЕС. Релоканты — основной драйвер спроса 2022–2024.
-        </div>
-        <div class="callout callout-o" style="background:#fff3e0; border-left:4px solid #e65100; margin-top:8px">
-          <strong>Батуми:</strong> 84% сделок — иностранцы. Рынок де-факто международный. Россияне, украинцы, турки, израильтяне, граждане СНГ. Инвест-спрос на STR.
-        </div>
-        <div style="margin-top:12px">
-          <h3>Права иностранных покупателей</h3>
-          <table>
-            <tr><th>Тип</th><th>Право</th></tr>
-            <tr><td>Квартиры / апартаменты</td><td><span class="badge badge-g">✅ Полное право собственности</span></td></tr>
-            <tr><td>Дома / коттеджи</td><td><span class="badge badge-g">✅ Полное право собственности</span></td></tr>
-            <tr><td>Сельхоз земля</td><td><span class="badge badge-r">❌ Иностранцам запрещено</span></td></tr>
-            <tr><td>Коммерческая недвижимость</td><td><span class="badge badge-g">✅ Полное право собственности</span></td></tr>
-            <tr><td>Репатриация прибыли</td><td><span class="badge badge-g">✅ Без ограничений</span></td></tr>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="src-row">
-    <span class="src-label">Источники:</span>
-    <a class="src-chip" href="https://expathub.ge/real-estate-in-georgia-country-tbilisi/">ExpatHub.ge Buyer's Guide</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://centrarium.com/en/blog/rynok-zhiloj-nedvizhimosti-tbilisi-v-2025-godu-336.html">Centrarium Тбилиси 2025</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.globalpropertyguide.com/asia/georgia/buying-guide">Global Property Guide Buying Guide</a><span class="fr-g">🟢</span>
-  </div>
-</div>
-
-<!-- SECTION 8: INVESTOR MATH -->
-<div class="section">
-  <div class="section-title">8. Калькулятор инвестора: математика по квартире <span class="section-tag">КЕЙСЫ</span></div>
-  <div class="callout callout-blue">
-    Квартира 50 м². Ремонт: <strong>$700/м² = $35 000</strong> (данные инвестора-резидента, апрель 2026). STR: управление <strong>30%</strong>, налог 5% от выручки. Коммунальные платежи: <strong>$1/м²/мес × 50 м² = $50/мес = $600/год</strong> (вода, электричество, газ, ТО).
-    <br><small style="color:#888">По данным инвестора-резидента, ср. коммунальные в Тбилиси и Батуми ~$1/м²/мес. Мебель и техника не включены (~$5 000–10 000 дополнительно). Три сценария occupancy по данным AirROI / Airbtics.</small>
-  </div>
-
-  <!-- TBILISI LTR -->
-  <h3 style="margin: 12px 0 8px">🏙️ Тбилиси LTR — Сабуртало ($1 200/м²)</h3>
-  <div class="grid-3">
-    <div class="city-card">
-      <h4 style="color:#888; font-size:12px">Пессимист (AirROI)</h4>
-      <div class="math-row"><span>Квартира 50 м²</span><span>$60 000</span></div>
-      <div class="math-row"><span>Ремонт</span><span>$35 000</span></div>
-      <div class="math-row"><span>Итого вложено</span><span>$95 000</span></div>
-      <div class="math-row"><span>Аренда/мес</span><span>$450</span></div>
-      <div class="math-row"><span>Gross/год</span><span>$5 400</span></div>
-      <div class="math-row"><span>−Налог 5%</span><span>−$270</span></div>
-      <div class="math-row"><span>−Коммунальные платежи $1/м²</span><span>−$600</span></div>
-      <div class="math-row"><span>Net доход/год</span><span>$4 530</span></div>
-      <div class="math-row"><span>Net yield</span><span>4.8%</span></div>
-    </div>
-    <div class="city-card" style="border-color:#3b6fa0">
-      <h4 style="color:#3b6fa0; font-size:12px">Реалист (Airbtics медиана)</h4>
-      <div class="math-row"><span>Квартира 50 м²</span><span>$60 000</span></div>
-      <div class="math-row"><span>Ремонт</span><span>$35 000</span></div>
-      <div class="math-row"><span>Итого вложено</span><span>$95 000</span></div>
-      <div class="math-row"><span>Аренда/мес</span><span>$550</span></div>
-      <div class="math-row"><span>Gross/год</span><span>$6 600</span></div>
-      <div class="math-row"><span>−Налог 5%</span><span>−$330</span></div>
-      <div class="math-row"><span>−Коммунальные платежи $1/м²</span><span>−$600</span></div>
-      <div class="math-row"><span>Net доход/год</span><span>$5 670</span></div>
-      <div class="math-row"><span>Net yield</span><span style="color:#3b6fa0">6.0%</span></div>
-    </div>
-    <div class="city-card" style="border-color:#2d7a2d">
-      <h4 style="color:#2d7a2d; font-size:12px">Оптимист (топ-25%, LTR)</h4>
-      <div class="math-row"><span>Квартира 50 м²</span><span>$60 000</span></div>
-      <div class="math-row"><span>Ремонт</span><span>$35 000</span></div>
-      <div class="math-row"><span>Итого вложено</span><span>$95 000</span></div>
-      <div class="math-row"><span>Аренда/мес</span><span>$700</span></div>
-      <div class="math-row"><span>Gross/год</span><span>$8 400</span></div>
-      <div class="math-row"><span>−Налог 5%</span><span>−$420</span></div>
-      <div class="math-row"><span>−Коммунальные платежи $1/м²</span><span>−$600</span></div>
-      <div class="math-row"><span>Net доход/год</span><span>$7 380</span></div>
-      <div class="math-row"><span>Net yield</span><span style="color:#2d7a2d">7.8%</span></div>
-    </div>
-  </div>
-
-  <!-- TBILISI STR -->
-  <h3 style="margin: 16px 0 8px">🏙️ Тбилиси STR — центр ($1 600/м²)</h3>
-  <div class="grid-3">
-    <div class="city-card">
-      <h4 style="color:#888; font-size:12px">Пессимист (AirROI среднее)</h4>
-      <div class="math-row"><span>Итого вложено</span><span>$115 000</span></div>
-      <div class="math-row"><span>Occupancy 40.9% / 149 ночей</span><span></span></div>
-      <div class="math-row"><span>ADR $57 × 149</span><span>$8 493</span></div>
-      <div class="math-row"><span>−Управление 30%</span><span>−$2 548</span></div>
-      <div class="math-row"><span>−Налог 5%</span><span>−$425</span></div>
-      <div class="math-row"><span>−Коммунальные платежи $1/м²</span><span>−$600</span></div>
-      <div class="math-row"><span>Net доход/год</span><span>$4 920</span></div>
-      <div class="math-row"><span>Net yield</span><span>4.3%</span></div>
-    </div>
-    <div class="city-card" style="border-color:#3b6fa0">
-      <h4 style="color:#3b6fa0; font-size:12px">Реалист (Airbtics медиана)</h4>
-      <div class="math-row"><span>Итого вложено</span><span>$115 000</span></div>
-      <div class="math-row"><span>Occupancy 63% / 230 ночей</span><span></span></div>
-      <div class="math-row"><span>ADR $42 × 230</span><span>$9 660</span></div>
-      <div class="math-row"><span>−Управление 30%</span><span>−$2 898</span></div>
-      <div class="math-row"><span>−Налог 5%</span><span>−$483</span></div>
-      <div class="math-row"><span>−Коммунальные платежи $1/м²</span><span>−$600</span></div>
-      <div class="math-row"><span>Net доход/год</span><span>$5 679</span></div>
-      <div class="math-row"><span>Net yield</span><span style="color:#3b6fa0">4.9%</span></div>
-    </div>
-    <div class="city-card" style="border-color:#2d7a2d">
-      <h4 style="color:#2d7a2d; font-size:12px">Оптимист (топ-25% AirROI)</h4>
-      <div class="math-row"><span>Итого вложено</span><span>$115 000</span></div>
-      <div class="math-row"><span>Occupancy 69% / 252 ночей</span><span></span></div>
-      <div class="math-row"><span>ADR $62 × 252</span><span>$15 624</span></div>
-      <div class="math-row"><span>−Управление 30%</span><span>−$4 687</span></div>
-      <div class="math-row"><span>−Налог 5%</span><span>−$781</span></div>
-      <div class="math-row"><span>−Коммунальные платежи $1/м²</span><span>−$600</span></div>
-      <div class="math-row"><span>Net доход/год</span><span>$9 556</span></div>
-      <div class="math-row"><span>Net yield</span><span style="color:#2d7a2d">8.3%</span></div>
-    </div>
-  </div>
-
-  <!-- BATUMI STR -->
-  <h3 style="margin: 16px 0 8px">🌊 Батуми STR — 1-я линия ($1 600/м²)</h3>
-  <div class="grid-3">
-    <div class="city-card" style="border-color:#c62828">
-      <h4 style="color:#c62828; font-size:12px">Пессимист (AirROI среднее по рынку)</h4>
-      <div class="math-row"><span>Итого вложено</span><span>$115 000</span></div>
-      <div class="math-row"><span>Occupancy 35.5% / 130 ночей</span><span></span></div>
-      <div class="math-row"><span>Выручка/год (AirROI avg)</span><span>$3 766</span></div>
-      <div class="math-row"><span>−Управление 30%</span><span>−$1 130</span></div>
-      <div class="math-row"><span>−Налог 5%</span><span>−$188</span></div>
-      <div class="math-row"><span>−Коммунальные платежи $1/м²</span><span>−$600</span></div>
-      <div class="math-row"><span>Net доход/год</span><span>$1 848</span></div>
-      <div class="math-row"><span>Net yield</span><span style="color:#c62828">1.6%</span></div>
-    </div>
-    <div class="city-card" style="border-color:#3b6fa0">
-      <h4 style="color:#3b6fa0; font-size:12px">Реалист (Airbtics медиана)</h4>
-      <div class="math-row"><span>Итого вложено</span><span>$115 000</span></div>
-      <div class="math-row"><span>Occupancy 53% / 193 ночи</span><span></span></div>
-      <div class="math-row"><span>ADR $43 × 193</span><span>$8 299</span></div>
-      <div class="math-row"><span>−Управление 30%</span><span>−$2 490</span></div>
-      <div class="math-row"><span>−Налог 5%</span><span>−$415</span></div>
-      <div class="math-row"><span>−Коммунальные платежи $1/м²</span><span>−$600</span></div>
-      <div class="math-row"><span>Net доход/год</span><span>$4 794</span></div>
-      <div class="math-row"><span>Net yield</span><span style="color:#3b6fa0">4.2%</span></div>
-    </div>
-    <div class="city-card" style="border-color:#2d7a2d; background:#f1f8f1">
-      <h4 style="color:#2d7a2d; font-size:12px">Оптимист (1-я линия, топ-25%)</h4>
-      <div class="math-row"><span>Итого вложено</span><span>$115 000</span></div>
-      <div class="math-row"><span>Occupancy 56% / 204 ночи</span><span></span></div>
-      <div class="math-row"><span>ADR $63 × 204</span><span>$12 852</span></div>
-      <div class="math-row"><span>−Управление 30%</span><span>−$3 856</span></div>
-      <div class="math-row"><span>−Налог 5%</span><span>−$643</span></div>
-      <div class="math-row"><span>−Коммунальные платежи $1/м²</span><span>−$600</span></div>
-      <div class="math-row"><span>Net доход/год</span><span>$7 753</span></div>
-      <div class="math-row"><span>Net yield</span><span style="color:#2d7a2d">6.7%</span></div>
-    </div>
-  </div>
-
-  <div class="callout callout-red" style="margin-top:16px">
-    <strong>Вывод по реальным данным AirROI:</strong> Средний инвестор в Батуми (35.5% occupancy, $3 766 выручки в год) получает <strong>net yield ~1.6%</strong> после управления 30%, налога и коммуналки — убыток с учётом стоимости денег. 61% листингов Батуми фактически не бронируются. Только топ-25% объектов на 1-й линии выходят на приемлемые 6–7%. <strong>Рекламируемые 15–18% — это не средний рынок.</strong>
-  </div>
-  <div class="src-row">
-    <span class="src-label">Данные:</span>
-    <a class="src-chip" href="https://www.airroi.com/report/world/georgia/tbilisi/tbilisi">AirROI Тбилиси</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.airroi.com/report/world/georgia/autonomous-republic-of-adjara/batumi">AirROI Батуми</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://airbtics.com/annual-airbnb-revenue-in-tbilisi-georgia/">Airbtics Тбилиси</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://airbtics.com/annual-airbnb-revenue-in-batumi-georgia/">Airbtics Батуми</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.airdna.co/vacation-rental-data/app/ge/default/tbilisi/overview">AirDNA Тбилиси</a><span class="fr-g">🟢</span>
-  </div>
-  <div class="src-row">
-    <span class="src-label">Расчёт на основе:</span>
-    <a class="src-chip" href="https://www.globalpropertyguide.com/asia/georgia/rental-yields">Global Property Guide yields</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://airbtics.com/annual-airbnb-revenue-in-batumi-georgia/">Airbtics Батуми</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://globihome.com/en/blog/batumi-real-estate-high-returns">Globihome Batumi ROI</a><span class="fr-y">🟡</span>
-  </div>
-</div>
-
-<!-- SECTION 9: MORTGAGE & FINANCING -->
-<div class="section">
-  <div class="section-title">9. Ипотека и финансирование <span class="section-tag">ФИНАНСИРОВАНИЕ</span></div>
-  <div class="callout callout-red">
-    <strong>Рекомендация:</strong> Грузинская ипотека в GEL по 13–15% — крайне невыгодна для инвестора. Покупать за собственные $ или через рассрочку от застройщика (0% на 2–3 года). USD-ипотека в Грузии де-факто недоступна.
-  </div>
-  <div class="grid-2">
-    <div>
-      <table>
-        <tr><th>Параметр</th><th>Значение</th></tr>
-        <tr><td>Ипотечная ставка в GEL (средняя)</td><td><strong>13.28%</strong> (NBG, март 2025)</td></tr>
-        <tr><td>Ипотечная ставка в USD</td><td>7–9% (единичные банки)</td></tr>
-        <tr><td>LTV для нерезидентов</td><td>до 60–70%</td></tr>
-        <tr><td>Ипотечный рынок / ВВП</td><td>~13%</td></tr>
-        <tr><td>Рассрочка от застройщика</td><td>0% на 2–3 года (популярно)</td></tr>
-        <tr><td>Первоначальный взнос</td><td>30–40% стандарт</td></tr>
-      </table>
-    </div>
-    <div>
-      <div class="callout callout-blue" style="height:auto">
-        <h3 style="margin-bottom:8px">Альтернативные стратегии входа</h3>
-        <ul style="margin-left:16px; font-size:13px; line-height:1.8">
-          <li><strong>100% cash</strong> — оптимально для маленьких квартир $50–80K, быстрая сделка</li>
-          <li><strong>Рассрочка застройщика</strong> — 30% сейчас + 70% при сдаче (2–3 года без %)</li>
-          <li><strong>Pre-sale</strong> — входить на стадии котлована, +20–30% к моменту сдачи</li>
-          <li><strong>Апарт-отели</strong> — встроенное управление, гарантированная аренда (6–8%)</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="src-row">
-    <span class="src-label">Источники:</span>
-    <a class="src-chip" href="https://nbg.gov.ge/en/media/news/the-national-bank-of-georgia-starts-to-publish-residential-real-estate-price-and-rent-indi">NBG — Real Estate Indices</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://www.globalpropertyguide.com/asia/georgia/buying-guide">Global Property Guide Mortgage</a><span class="fr-g">🟢</span>
-  </div>
-</div>
-
-<!-- SECTION 10: COTTAGE VILLAGES -->
-<div class="section">
-  <div class="section-title">10. Коттеджные поселки: рынок и экономика для застройщика <span class="section-tag">ЗАСТРОЙКА</span></div>
-
-  <div class="callout callout-blue">
-    <strong>Контекст рынка:</strong> Коттеджные поселки — нишевый сегмент (~5% сделок). Квартиры занимают ~95% рынка. Но ИЖС растёт на <strong>+13.5% в год</strong> с низкой базы (Geostat, Q1 2025). Организованных коттеджных поселков в Грузии мало — это возможность для первопроходца.
-    <br><small style="color:#888">⚠️ Строительные затраты ниже — допущения, основанные на индексе Geostat + региональных данных. Прямых официальных данных по Грузии нет. Верифицированные данные: цены на землю, цены продаж, рыночные ориентиры.</small>
-  </div>
-
-  <!-- LAND PRICES -->
-  <h3 style="margin:14px 0 8px">Цены на землю: пригороды Тбилиси vs побережье Батуми</h3>
-  <div class="grid-2">
-    <table>
-      <tr><th colspan="4">Тбилиси и пригороды</th></tr>
-      <tr><th>Локация</th><th>Км от центра</th><th>$/м²</th><th>$/сотку</th></tr>
-      <tr><td><strong>Сагурамо</strong></td><td>15 км</td><td>$200–406</td><td>$20 000–41 000</td></tr>
-      <tr><td><strong>Мцхета</strong></td><td>28 км</td><td>$150–300</td><td>$15 000–30 000</td></tr>
-      <tr><td><strong>Шиндиси</strong></td><td>12 км</td><td>$250–350</td><td>$25 000–35 000</td></tr>
-      <tr><td><strong>Оптовая покупка 1–3 га</strong></td><td>15–30 км</td><td class="best"><strong>$50–100</strong></td><td>$5 000–10 000</td></tr>
-      <tr><td><strong>Тианети (горы)</strong></td><td>80 км</td><td>$8–20</td><td>$800–2 000</td></tr>
-    </table>
-    <table>
-      <tr><th colspan="4">Батуми и побережье — цены на ЗЕМЛЮ</th></tr>
-      <tr><th>Локация</th><th>Км от Батуми</th><th>$/м² земля</th><th>$/сотку</th></tr>
-      <tr class="best"><td><strong>Гонио</strong></td><td>5 км</td><td><strong>$150–200</strong></td><td>$15 000–20 000</td></tr>
-      <tr class="best"><td><strong>Чакви</strong></td><td>10 км</td><td><strong>$150–200</strong></td><td>$15 000–20 000</td></tr>
-      <tr class="best"><td><strong>Квариати</strong></td><td>18 км</td><td><strong>$150–200</strong></td><td>$15 000–20 000</td></tr>
-    </table>
-    <div style="font-size:11px;color:#2d7a2d;margin-top:4px;padding:6px;background:#e8f5e9;border-radius:4px;border-left:3px solid #2d7a2d">
-      Данные подтверждены инвестором-резидентом, апрель 2026. Цены на землю в Гонио/Квариати/Чакви сопоставимы между собой ($150–200/м²) и существенно ниже, чем цены готовых квартир в Батуми ($1 400–1 900/м²).
-    </div>
-  </div>
-  <div class="src-row" style="margin-top:6px">
-    <a class="src-chip" href="https://tranio.ru/georgia/">Tranio Georgia</a><span class="fr-g">🟢 мар.2026</span>
-    <a class="src-chip" href="https://geoln.com/property/cottages/georgia">GEOLN.com</a><span class="fr-g">🟢 мар.2026</span>
-    <a class="src-chip" href="https://korter.ge/en/cottages-in-batumi">Korter.ge</a><span class="fr-g">🟢 апр.2026</span>
-    <a class="src-chip" href="https://galtandtaggart.com/report/batumi-residential-real-estate-2025-review-and-2026-outlook/">Galt&amp;Taggart Batumi 2025</a><span class="fr-g">🟢</span>
-  </div>
-
-  <!-- LAND CHART -->
-  <div class="grid-2" style="margin-top:14px">
-    <div class="chart-box">
-      <h3 style="margin-bottom:8px;font-size:13px">Цены земли: розница vs оптовая покупка ($/м²)</h3>
-      <canvas id="cottageLandChart"></canvas>
-    </div>
-    <div class="chart-box">
-      <h3 style="margin-bottom:8px;font-size:13px">Строительные затраты по сегментам ⚠️ Допущение ($/м²)</h3>
-      <canvas id="cottageBuildChart"></canvas>
-    </div>
-  </div>
-
-  <!-- CONSTRUCTION COSTS -->
-  <h3 style="margin:16px 0 8px">Строительные затраты (данные инвестора-резидента, апрель 2026)</h3>
-  <table>
-    <tr><th>Сегмент</th><th>Технология</th><th>$/м² под ключ</th><th>Примечание</th></tr>
-    <tr class="best"><td><span class="badge badge-g">Стандарт</span></td><td>Газобетон, монолит</td><td><strong>$600</strong></td><td>Наиболее распространённый формат в Грузии</td></tr>
-    <tr><td><span class="badge badge-o">Премиум</span></td><td>Монолит, фасад, чистовая отделка</td><td><strong>$750</strong></td><td>Высококачественная отделка, премиум материалы</td></tr>
-  </table>
-  <div class="src-row" style="margin-top:6px">
-    <a class="src-chip" href="https://www.geostat.ge/en/modules/categories/655/construction-cost-index">Geostat — Construction Cost Index</a><span class="fr-g">🟢 май 2025</span>
-    <span style="font-size:11px;color:#2d7a2d">Данные подтверждены инвестором-резидентом (апрель 2026). Эконом-сегмент (каркас/SIP) не представлен на рынке Грузии.</span>
-  </div>
-
-  <!-- EXISTING PROJECTS -->
-  <h3 style="margin:16px 0 8px">Существующие проекты — ориентиры рынка</h3>
-  <table>
-    <tr><th>Проект</th><th>Локация</th><th>Тип</th><th>Цена</th><th>$/м²</th><th>Источник</th></tr>
-    <tr><td><strong>Didi Dighomi коттедж</strong></td><td>Тбилиси</td><td>Дом 380 м²</td><td>$390 000</td><td>$1 026</td><td>Tranio мар.2026</td></tr>
-    <tr><td><strong>Сагурамо коттедж</strong></td><td>15 км от Тбилиси</td><td>Дом 142 м²</td><td>$255 000</td><td>$1 789</td><td>Tranio мар.2026</td></tr>
-    <tr><td><strong>Мцхета частный</strong></td><td>28 км от Тбилиси</td><td>Дом 317 м²</td><td>$200 000–300 000</td><td>$630–946</td><td>Tranio мар.2026</td></tr>
-    <tr class="best"><td><strong>Paradise Georgia</strong></td><td>Кобулети</td><td>Коттедж 140 м²</td><td>$235 000</td><td>$1 679</td><td>Korter.ge апр.2026</td></tr>
-    <tr><td><strong>Diamond Villas</strong></td><td>Чакви</td><td>Вилла 207 м²</td><td>$326 000</td><td>$1 579</td><td>Korter.ge апр.2026</td></tr>
-    <tr><td><strong>Batumi Country Club</strong></td><td>Батуми</td><td>Коттедж 283 м²</td><td>$382 000</td><td>$1 350</td><td>Korter.ge апр.2026</td></tr>
-    <tr class="best"><td><strong>Gonio Marina (Emaar)</strong></td><td>Гонио</td><td>Мегапроект</td><td colspan="2">$5.5 млрд инвестиций (анонс янв.2025)</td><td>Reuters янв.2025</td></tr>
-  </table>
-
-  <!-- DEVELOPER ECONOMICS -->
-  <h3 style="margin:20px 0 8px">📐 Экономика застройщика: 3 формата</h3>
-  <p style="font-size:12px;color:#666;margin-bottom:10px">Расчёт на один объект. Земля — оптовая закупка крупного участка. ⚠️ = допущение без прямого источника по Грузии.</p>
-
-  <div class="grid-3">
-    <!-- FORMAT 1 -->
-    <div class="city-card" style="border-color:#3b6fa0">
-      <h4 style="color:#3b6fa0">🏙️ Формат 1: Тбилиси пригород</h4>
-      <p style="font-size:11px;color:#666;margin-bottom:8px">25 домов × 160 м², газобетон, Сагурамо/Мцхета</p>
-      <div class="math-row"><span>Земля (опт, 2.5 га по $55/м²) ⚠️</span><span>$55 000</span></div>
-      <div class="math-row"><span>Строительство 160 м² × $600</span><span>$96 000</span></div>
-      <div class="math-row"><span>Инфра (дороги, коммуникации)</span><span>$20 000</span></div>
-      <div class="math-row"><span>Проект + разрешения</span><span>$7 000</span></div>
-      <div class="math-row"><span>Продажи и маркетинг 5%</span><span>$11 200</span></div>
-      <div class="math-row"><span>Управление проектом</span><span>$8 000</span></div>
-      <div class="math-row" style="font-weight:600"><span>Итого затрат</span><span>$197 200</span></div>
-      <div class="math-row"><span>Цена продажи ($1 400/м²)</span><span>$224 000</span></div>
-      <div class="math-row" style="color:#2d7a2d;font-weight:700"><span>Маржа застройщика</span><span>$26 800 (12.0%)</span></div>
-      <div style="margin-top:8px;font-size:11px;color:#555;background:#f0f4ff;padding:6px;border-radius:4px">
-        <strong>Весь проект:</strong> Прибыль $670 000 на вложениях $4.9M<br>
-        <strong>ROI:</strong> ~13.6% за 30 месяцев<br>
-        <strong>Breakeven:</strong> продать 22/25 домов (88%)<br>
-        <strong>Целевой покупатель:</strong> IT-семьи, релоканты, долгосрочная аренда
-      </div>
-    </div>
-
-    <!-- FORMAT 2 -->
-    <div class="city-card" style="border-color:#c9502a; background:#fff9f7">
-      <h4 style="color:#c9502a">🌊 Формат 2: Гонио (прибрежный рост)</h4>
-      <p style="font-size:11px;color:#666;margin-bottom:8px">20 домов × 180 м², участок 300 м²/ед., стандарт, 5 км от Батуми</p>
-      <div class="math-row"><span>Земля 8 000 м² × $175/м²</span><span>$70 000</span></div>
-      <div class="math-row"><span>Строительство 180 м² × $600</span><span>$108 000</span></div>
-      <div class="math-row"><span>Инфра (дороги, сети, забор)</span><span>$28 000</span></div>
-      <div class="math-row"><span>Проект + разрешения</span><span>$9 000</span></div>
-      <div class="math-row"><span>Продажи и маркетинг 5%</span><span>$16 200</span></div>
-      <div class="math-row"><span>Управление проектом</span><span>$10 000</span></div>
-      <div class="math-row" style="font-weight:600"><span>Итого затрат</span><span>$241 200</span></div>
-      <div class="math-row"><span>Цена продажи ($1 800/м²)</span><span>$324 000</span></div>
-      <div class="math-row" style="color:#2d7a2d;font-weight:700"><span>Маржа застройщика</span><span>$82 800 (25.6%)</span></div>
-      <div style="margin-top:8px;font-size:11px;color:#555;background:#fff3ee;padding:6px;border-radius:4px">
-        <strong>Весь проект:</strong> Прибыль $1.66M на вложениях $4.8M<br>
-        <strong>ROI:</strong> ~34.3% за 36 месяцев<br>
-        <strong>Breakeven:</strong> продать 15/20 домов (75%)<br>
-        <strong>Катализатор:</strong> Emaar Gonio Marina ($5.5B, анонс 2025) ↑ цены
-      </div>
-    </div>
-
-    <!-- FORMAT 3 -->
-    <div class="city-card" style="border-color:#2d7a2d; background:#f1f8f1">
-      <h4 style="color:#2d7a2d">🏆 Формат 3: Квариати/Чакви (премиум)</h4>
-      <p style="font-size:11px;color:#666;margin-bottom:8px">12 вилл × 250 м², участок 350 м²/ед., монолит + чистовая, 1-я линия</p>
-      <div class="math-row"><span>Земля 6 600 м² × $175/м²</span><span>$96 250</span></div>
-      <div class="math-row"><span>Строительство 250 м² × $750</span><span>$187 500</span></div>
-      <div class="math-row"><span>Инфра (бассейн, ландшафт, забор)</span><span>$45 000</span></div>
-      <div class="math-row"><span>Проект + разрешения</span><span>$18 000</span></div>
-      <div class="math-row"><span>Продажи и маркетинг 5%</span><span>$25 000</span></div>
-      <div class="math-row"><span>Управление проектом</span><span>$15 000</span></div>
-      <div class="math-row" style="font-weight:600"><span>Итого затрат</span><span>$386 750</span></div>
-      <div class="math-row"><span>Цена продажи ($2 000/м²)</span><span>$500 000</span></div>
-      <div class="math-row" style="color:#2d7a2d;font-weight:700"><span>Маржа застройщика</span><span>$113 250 (22.7%)</span></div>
-      <div style="margin-top:8px;font-size:11px;color:#555;background:#edf7ed;padding:6px;border-radius:4px">
-        <strong>Весь проект:</strong> Прибыль $1.36M на вложениях $4.6M<br>
-        <strong>ROI:</strong> ~29.3% за 42 месяца<br>
-        <strong>Breakeven:</strong> продать 10/12 вилл (83%)<br>
-        <strong>Целевой покупатель:</strong> состоятельные инвесторы под STR/летний дом
-      </div>
-    </div>
-  </div>
-
-  <!-- DEVELOPER CHARTS -->
-  <div class="grid-2" style="margin-top:16px">
-    <div class="chart-box">
-      <h3 style="margin-bottom:8px;font-size:13px">Затраты vs цена продажи по форматам ($/ед.)</h3>
-      <canvas id="cottageDevChart"></canvas>
-    </div>
-    <div class="chart-box">
-      <h3 style="margin-bottom:8px;font-size:13px">Net yield: квартира vs коттедж (реалист, %)</h3>
-      <canvas id="cottageYieldChart"></canvas>
-    </div>
-  </div>
-
-  <!-- YIELD FOR INVESTOR BUYING COTTAGE -->
-  <h3 style="margin:20px 0 8px">Доходность коттеджа для инвестора-покупателя</h3>
-  <table>
-    <tr>
-      <th>Объект</th>
-      <th>Цена</th>
-      <th>Аренда/год</th>
-      <th>−Налог 5%</th>
-      <th>−Эксплуатация</th>
-      <th>Net доход</th>
-      <th>Net yield</th>
-    </tr>
-    <tr>
-      <td>Дом 160 м² Тбилиси LTR ($1 400/м²)</td>
-      <td>$224 000</td>
-      <td>$1 500/мес = $18 000</td>
-      <td>−$900</td>
-      <td>−$1 920 ($1/м²)</td>
-      <td>$15 180</td>
-      <td><strong>6.8%</strong></td>
-    </tr>
-    <tr class="best">
-      <td>Дом 180 м² Гонио STR ($1 800/м²)</td>
-      <td>$324 000</td>
-      <td>183 ноч × $120 = $21 960 (−упр.30% = −$6 588)</td>
-      <td>−$1 098</td>
-      <td>−$2 160 ($1/м²)</td>
-      <td>$12 114</td>
-      <td><strong>3.7%</strong></td>
-    </tr>
-    <tr>
-      <td>Вилла 250 м² Квариати STR ($2 000/м²)</td>
-      <td>$500 000</td>
-      <td>150 ноч × $200 = $30 000 (−упр.30% = −$9 000)</td>
-      <td>−$1 500</td>
-      <td>−$3 000 ($1/м²)</td>
-      <td>$16 500</td>
-      <td><strong>3.3%</strong></td>
-    </tr>
-  </table>
-  <div class="callout callout-red" style="margin-top:10px">
-    <strong>Вывод для инвестора-покупателя:</strong> Коттедж как арендный актив уступает квартире. STR yield 3.3–3.7% (управление 30% + коммунальные), LTR yield ~6.8%. Квартиры в Тбилиси дают 4.9–6.0% при значительно меньшем пороге входа. Коттедж оправдан как <strong>собственное проживание + апсайд от роста цен</strong>, а не как чистый арендный бизнес.
-  </div>
-
-  <!-- BEST STRATEGIES -->
-  <h3 style="margin:16px 0 8px">Лучшие стратегии для застройщика коттеджного поселка</h3>
-  <div class="grid-3">
-    <div style="background:#e3f2fd;border-radius:8px;padding:14px">
-      <h4 style="color:#1565c0;margin-bottom:8px">🎯 Стратегия 1: Тбилиси — IT-кластер</h4>
-      <ul style="font-size:12px;color:#333;line-height:1.8;padding-left:16px">
-        <li>Локация: Сагурамо, Мцхета (15–28 км)</li>
-        <li>Формат: 25–40 домов, 160–200 м²</li>
-        <li>Целевой рынок: IT-семьи, релоканты</li>
-        <li>Ключевое УТП: <strong>коворкинг + детский сад</strong> в поселке</li>
-        <li>Аренда: $1 200–2 000/мес LTR</li>
-        <li>Сроки: 30 месяцев, ROI ~9%</li>
-        <li>Риск: <span style="color:#c9502a">низкая маржа, длинный цикл продаж</span></li>
-      </ul>
-    </div>
-    <div style="background:#fff3e0;border-radius:8px;padding:14px">
-      <h4 style="color:#e65100;margin-bottom:8px">🎯 Стратегия 2: Гонио — первопроходец</h4>
-      <ul style="font-size:12px;color:#333;line-height:1.8;padding-left:16px">
-        <li>Локация: Гонио (5 км от Батуми)</li>
-        <li>Формат: 20–30 домов, 200–250 м²</li>
-        <li>Целевой рынок: инвесторы под STR, туристы</li>
-        <li>Ключевое УТП: <strong>управляющая компания "под ключ"</strong> в составе проекта</li>
-        <li>Катализатор: Emaar Gonio Marina (+$5.5B)</li>
-        <li>Сроки: 36 месяцев, ROI ~15%</li>
-        <li>Риск: <span style="color:#c9502a">политические риски, Батуми перенасыщен</span></li>
-      </ul>
-    </div>
-    <div style="background:#e8f5e9;border-radius:8px;padding:14px">
-      <h4 style="color:#2d7a2d;margin-bottom:8px">🎯 Стратегия 3: Квариати — премиум</h4>
-      <ul style="font-size:12px;color:#333;line-height:1.8;padding-left:16px">
-        <li>Локация: Квариати / Чакви</li>
-        <li>Формат: 10–15 вилл, 280–400 м²</li>
-        <li>Целевой рынок: состоятельные иностранцы, ВНЖ ($150K+)</li>
-        <li>Ключевое УТП: <strong>закрытый охраняемый комплекс + бассейн</strong></li>
-        <li>Цена продажи: $3 000–4 500/м²</li>
-        <li>Сроки: 42 месяца, ROI ~22%</li>
-        <li>Риск: <span style="color:#c9502a">высокий порог ($10M+), медленные продажи</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- KEY RISKS -->
-  <h3 style="margin:16px 0 8px">⚠️ Ключевые риски застройщика</h3>
-  <table>
-    <tr><th>Риск</th><th>Вероятность</th><th>Митигация</th></tr>
-    <tr><td><strong>Сельскохозяйственное зонирование</strong> — покупаете с/х землю, но не можете строить жилое</td><td><span class="badge badge-o">Высокая</span></td><td>Покупать только с подтверждённым жилым статусом (residential zone)</td></tr>
-    <tr><td><strong>Задержки строительства</strong> — грузинские подрядчики опаздывают на 12–24 месяца</td><td><span class="badge badge-o">Высокая</span></td><td>Штрафные санкции в контракте, поэтапная оплата по КС</td></tr>
-    <tr><td><strong>Медленные продажи</strong> — рынок коттеджей нишевый, покупателей мало</td><td><span class="badge badge-b">Средняя</span></td><td>Продажи с котлована, гибкая рассрочка, управляющая компания в проекте</td></tr>
-    <tr><td><strong>Рост стоимости стройматериалов</strong> — +8.9% г/г (Geostat 2025)</td><td><span class="badge badge-b">Средняя</span></td><td>Фиксировать цены с подрядчиком на старте, закупать материалы авансом</td></tr>
-    <tr><td><strong>Политическая нестабильность</strong> — влияет на иностранный спрос</td><td><span class="badge badge-b">Средняя</span></td><td>Ориентироваться на местный рынок для Тбилиси-проектов</td></tr>
-  </table>
-
-  <div class="src-row" style="margin-top:10px">
-    <a class="src-chip" href="https://www.geostat.ge/en/modules/categories/655/construction-cost-index">Geostat CCI 2025</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://korter.ge/en/cottages-in-batumi">Korter.ge коттеджи</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://tranio.ru/georgia/">Tranio Georgia</a><span class="fr-g">🟢 мар.2026</span>
-    <a class="src-chip" href="https://www.investor.ge/2025/04/06/georgias-residential-real-estate-market-trends-challenges-and-prospects/">Investor.ge 2025</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://expathub.ge/real-estate-in-georgia-country-tbilisi/">ExpatHub.ge</a><span class="fr-g">🟢</span>
-    <a class="src-chip" href="https://galtandtaggart.com/report/batumi-residential-real-estate-2025-review-and-2026-outlook/">Galt&amp;Taggart Batumi 2025</a><span class="fr-g">🟢</span>
-  </div>
-</div>
-
-<!-- SECTION 11: GLOSSARY -->
-<div class="section">
-  <div class="section-title">11. Глоссарий <span class="section-tag">ТЕРМИНЫ</span></div>
-  <div class="grid-2">
-    <table>
-      <tr><th>Термин</th><th>Расшифровка</th></tr>
-      <tr><td><strong>LTR</strong></td><td>Long-Term Rental — долгосрочная аренда (от 1 месяца)</td></tr>
-      <tr><td><strong>STR</strong></td><td>Short-Term Rental — краткосрочная аренда (Airbnb/посуточно)</td></tr>
-      <tr><td><strong>ADR</strong></td><td>Average Daily Rate — средняя цена за ночь</td></tr>
-      <tr><td><strong>Occupancy</strong></td><td>Заполняемость — % дней в году, когда объект занят</td></tr>
-      <tr><td><strong>Gross yield</strong></td><td>Валовая доходность = годовая аренда / цена покупки × 100%</td></tr>
-      <tr><td><strong>Net yield</strong></td><td>Чистая доходность с учётом расходов (налоги, управление, простой)</td></tr>
-      <tr><td><strong>Capital gains</strong></td><td>Прирост капитала — прибыль от продажи актива</td></tr>
-    </table>
-    <table>
-      <tr><th>Термин</th><th>Расшифровка</th></tr>
-      <tr><td><strong>RPPI</strong></td><td>Residential Property Price Index — индекс цен на жильё (Geostat)</td></tr>
-      <tr><td><strong>LTV</strong></td><td>Loan-to-Value — доля кредита от стоимости объекта</td></tr>
-      <tr><td><strong>NBG</strong></td><td>National Bank of Georgia — Национальный банк Грузии</td></tr>
-      <tr><td><strong>GEL</strong></td><td>Грузинский лари (1 USD ≈ 2.7 GEL по курсу 2025)</td></tr>
-      <tr><td><strong>Geostat</strong></td><td>Национальное статистическое управление Грузии</td></tr>
-      <tr><td><strong>Pre-sale</strong></td><td>Покупка на стадии строительства (котлован), обычно дешевле на 20–30%</td></tr>
-      <tr><td><strong>AirDNA</strong></td><td>Аналитическая платформа для рынка краткосрочной аренды</td></tr>
-    </table>
-  </div>
-</div>
-
-</div><!-- /main -->
-
-<footer>
-  Данные: Galt&Taggart, TBC Capital, Geostat.ge, NBG, AirDNA, Airbtics, Global Property Guide, Cushman & Wakefield Georgia, ExpatHub.ge · Апрель 2026 · Только для информационных целей
-</footer>
-</div>
 <script>
-let spainInitialized = false;
-let georgiaInitialized = false;
-
-function switchTab(tab) {
-  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active-spain','active-georgia'); });
-  document.getElementById('pane-' + tab).classList.add('active');
-  const btn = document.querySelector('[onclick="switchTab(\'' + tab + '\')"]');
-  if (btn) btn.classList.add('active-' + tab);
-  window.scrollTo(0, 0);
-  if (tab === 'spain' && !spainInitialized) { initSpainCharts(); spainInitialized = true; }
-  if (tab === 'georgia' && !georgiaInitialized) { initGeorgiaCharts(); georgiaInitialized = true; }
-}
-window.addEventListener('load', function() { initSpainCharts(); spainInitialized = true; });
-function initSpainCharts() {
 const orange = '#c9502a', orangeL = '#e8845a', orangeLL = '#f5c4a8';
 const blue = '#3b6fa0', blueL = '#7aaad0';
 const green = '#2d7a2d', greenL = '#7ab87a';
@@ -3403,462 +2477,6 @@ new Chart(document.getElementById('marginChart'), {
     }
   }
 });
-}
-function initGeorgiaCharts() {
-const orange = '#c9502a';
-const blue = '#3b6fa0';
-const green = '#2d7a2d';
-const yellow = '#d4a017';
-const gray = '#888';
-const lightBlue = '#6ba3d6';
-const lightGreen = '#5aaa5a';
-const purple = '#7b5ea7';
-
-Chart.defaults.font.family = "'Segoe UI', Arial, sans-serif";
-Chart.defaults.font.size = 12;
-Chart.defaults.plugins.legend.labels.boxWidth = 12;
-
-// 1. Market size chart (bar - market volume trend)
-new Chart(document.getElementById('marketSizeChart'), {
-  type: 'bar',
-  data: {
-    labels: ['2020', '2021', '2022', '2023', '2024'],
-    datasets: [{
-      label: 'Объём рынка, $млрд',
-      data: [1.8, 2.3, 3.1, 3.7, 4.3],
-      backgroundColor: [blue, blue, blue, blue, green],
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      title: { display: true, text: 'Объём рынка жилой недвижимости Грузии, $млрд', font: { size: 13 } }
-    },
-    scales: {
-      y: { beginAtZero: true, title: { display: true, text: '$млрд' } }
-    }
-  }
-});
-
-// 2. Tbilisi prices by district
-new Chart(document.getElementById('tbilisiPricesChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Мтацминда', 'Вера/Центр', 'Ваке', 'Сабуртало', 'Чугурети', 'Дидгори', 'Диди Дигоми', 'Глдани/Самгори'],
-    datasets: [{
-      label: '$/м²',
-      data: [3294, 2300, 2000, 1300, 1100, 950, 850, 720],
-      backgroundColor: [orange, orange, '#e07050', blue, blue, lightBlue, lightBlue, '#aac4e0'],
-      borderRadius: 4
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { beginAtZero: true, title: { display: true, text: 'USD/м²' } }
-    }
-  }
-});
-
-// 3. Batumi prices by zone
-new Chart(document.getElementById('batumiPricesChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Исторический центр', 'Первая линия (бульвар)', 'Новые р-ны', 'Спальные р-ны'],
-    datasets: [{
-      label: '$/м²',
-      data: [2031, 1600, 1413, 1100],
-      backgroundColor: [orange, blue, lightBlue, '#aac4e0'],
-      borderRadius: 4
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { beginAtZero: true, title: { display: true, text: 'USD/м²' } }
-    }
-  }
-});
-
-// 4. Price growth
-new Chart(document.getElementById('priceGrowthChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Тбилиси первичный', 'Тбилиси вторичный', 'Батуми первичный', 'Батуми вторичный', 'RPPI Gruziya (Geostat)'],
-    datasets: [{
-      label: 'Рост цен г/г, %',
-      data: [11.6, 8.5, 11.4, 9.2, 10.36],
-      backgroundColor: [green, lightGreen, blue, lightBlue, orange],
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      title: { display: true, text: 'Рост цен г/г 2024, %' }
-    },
-    scales: {
-      y: { beginAtZero: true, max: 15, title: { display: true, text: '%' } }
-    }
-  }
-});
-
-// 5. Tbilisi yield by district
-new Chart(document.getElementById('tbilisiYieldChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Диди Дигоми', 'Глдани/Самгори', 'Чугурети', 'Сабуртало', 'Дидгори', 'Ваке', 'Мтацминда/Центр'],
-    datasets: [{
-      label: 'Gross yield, %',
-      data: [8.9, 8.3, 7.8, 7.2, 6.8, 5.8, 5.2],
-      backgroundColor: [green, green, lightGreen, lightGreen, blue, orange, orange],
-      borderRadius: 4
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      annotation: {
-        annotations: {
-          avgLine: {
-            type: 'line',
-            xMin: 7.78, xMax: 7.78,
-            borderColor: orange,
-            borderWidth: 2,
-            borderDash: [5, 3],
-            label: { content: 'ср. 7.78%', display: true, position: 'end', font: { size: 10 }, color: orange }
-          }
-        }
-      }
-    },
-    scales: {
-      x: { min: 4, max: 11, title: { display: true, text: '%' } }
-    }
-  }
-});
-
-// 6. Yield comparison: LTR vs STR
-new Chart(document.getElementById("geoYieldCompareChart"), {
-  type: 'bar',
-  data: {
-    labels: ['Тбилиси LTR\n(ср. по городу)', 'Тбилиси STR\n(Airbnb)', 'Батуми LTR', 'Батуми STR\n(Airbnb)', 'Батуми STR\n(1-я линия)'],
-    datasets: [
-      {
-        label: 'Gross yield %',
-        data: [7.78, 10.5, 10.0, 13.0, 18.0],
-        backgroundColor: [blue, lightBlue, lightGreen, green, '#1a7a1a'],
-        borderRadius: 4
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { display: false } },
-    scales: {
-      y: { beginAtZero: true, max: 22, title: { display: true, text: 'Gross yield %' } }
-    }
-  }
-});
-
-// 7. STR metrics — ADR by percentile (Airbtics, фев.2025–янв.2026)
-new Chart(document.getElementById('strMetricsChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Топ 10%', 'Топ 25%', 'Медиана', 'Нижние 25%'],
-    datasets: [
-      {
-        label: 'Тбилиси ADR $/ночь',
-        data: [98, 62, 42, 30],
-        backgroundColor: blue,
-        borderRadius: 4
-      },
-      {
-        label: 'Батуми ADR $/ночь',
-        data: [94, 58, 38, 22],
-        backgroundColor: orange,
-        borderRadius: 4
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'top' },
-      title: { display: true, text: 'ADR по перцентилям, $/ночь (Airbtics, активные листинги)' }
-    },
-    scales: {
-      y: { beginAtZero: true, title: { display: true, text: '$/ночь' } }
-    }
-  }
-});
-
-// 7b. Batumi seasonality (AirROI, avg revenue/month, 1BR)
-new Chart(document.getElementById('batumiSeasonChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
-    datasets: [{
-      label: 'Доход/мес, $ (AirROI среднее)',
-      data: [271, 286, 407, 450, 522, 780, 980, 1102, 680, 430, 295, 290],
-      backgroundColor: [
-        '#aac4e0','#aac4e0','#aac4e0','#d0e8c0','#d0e8c0',
-        orange, orange, green, lightGreen, '#d0e8c0','#aac4e0','#aac4e0'
-      ],
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      title: { display: true, text: 'Батуми: сезонность дохода Airbnb (AirROI, 1BR среднее)' },
-      annotation: {
-        annotations: {
-          avgLine: {
-            type: 'line',
-            yMin: 314, yMax: 314,
-            borderColor: '#c9502a',
-            borderWidth: 2,
-            borderDash: [5, 3],
-            label: { content: 'Среднее $314/мес = $3 766/год', display: true, position: 'end', font: { size: 10 }, color: '#c9502a' }
-          }
-        }
-      }
-    },
-    scales: {
-      y: { beginAtZero: true, title: { display: true, text: '$/мес' } }
-    }
-  }
-});
-
-// 7c. Tbilisi ADR by neighborhood (Airbtics, фев.2025–янв.2026)
-new Chart(document.getElementById('tbilisiNeighChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Надзаладеви', 'Дидубе', 'Исани-Самгори', 'Сабуртало', 'Ваке'],
-    datasets: [{
-      label: 'ADR $/ночь',
-      data: [33, 37, 40, 42, 50],
-      backgroundColor: [lightBlue, lightBlue, blue, blue, orange],
-      borderRadius: 4
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      title: { display: true, text: 'Тбилиси: ADR по районам, $/ночь' }
-    },
-    scales: {
-      x: { beginAtZero: true, title: { display: true, text: '$/ночь' } }
-    }
-  }
-});
-
-// 8. STR listings
-new Chart(document.getElementById('strListingsChart'), {
-  type: 'doughnut',
-  data: {
-    labels: ['Тбилиси (10 488)', 'Батуми (9 258)', 'Остальные'],
-    datasets: [{
-      data: [10488, 9258, 2500],
-      backgroundColor: [blue, orange, '#aac4e0']
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'bottom' },
-      title: { display: true, text: 'Активные Airbnb листинги (AirDNA 2025)' }
-    }
-  }
-});
-
-// 9. Permits chart
-new Chart(document.getElementById("geoPermitsChart"), {
-  type: 'line',
-  data: {
-    labels: ['2020', '2021', '2022', '2023', '2024'],
-    datasets: [
-      {
-        label: 'Разрешения (тыс.)',
-        data: [7.8, 9.2, 10.4, 11.3, 12.08],
-        borderColor: blue,
-        backgroundColor: 'rgba(59,111,160,0.1)',
-        fill: true,
-        tension: 0.4
-      },
-      {
-        label: 'Завершено (тыс.)',
-        data: [2.2, 2.6, 2.9, 3.2, 3.6],
-        borderColor: green,
-        backgroundColor: 'rgba(45,122,45,0.1)',
-        fill: true,
-        tension: 0.4
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { position: 'top' } },
-    scales: {
-      y: { beginAtZero: false, title: { display: true, text: 'тысяч объектов' } }
-    }
-  }
-});
-
-// 10. Market share
-new Chart(document.getElementById('marketShareChart'), {
-  type: 'pie',
-  data: {
-    labels: ['Тбилиси 72%', 'Батуми 20%', 'Прочие города 8%'],
-    datasets: [{
-      data: [72, 20, 8],
-      backgroundColor: [blue, orange, '#aac4e0']
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: 'bottom' },
-      title: { display: true, text: 'Доля городов в объёме рынка 2024 ($4.3B)' }
-    }
-  }
-});
-
-// 12. Cottage land prices — Tbilisi suburbs only (verified)
-new Chart(document.getElementById('cottageLandChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Сагурамо\n(розница)', 'Мцхета\n(розница)', 'Шиндиси\n(розница)', 'Пригород ТБ\n(опт 1–3 га)', 'Тианети\n(горы)'],
-    datasets: [{
-      label: '$/м²',
-      data: [303, 225, 300, 75, 14],
-      backgroundColor: [blue, blue, blue, green, lightBlue],
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      title: { display: true, text: 'Тбилиси и пригороды — верифицированные данные (Tranio мар.2026)' },
-      annotation: {
-        annotations: {
-          line1: { type: 'line', yMin: 75, yMax: 75, borderColor: green, borderWidth: 1, borderDash: [4,3],
-            label: { content: 'Опт. покупка ~$75', display: true, position: 'end', font: { size: 9 }, color: green } }
-        }
-      }
-    },
-    scales: { y: { beginAtZero: true, title: { display: true, text: '$/м²' } } }
-  }
-});
-
-// 13. Construction costs by segment
-new Chart(document.getElementById('cottageBuildChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Стандарт\n(газобетон, монолит)', 'Премиум\n(монолит + чистовая)'],
-    datasets: [
-      { label: '$/м² под ключ', data: [600, 750], backgroundColor: [blue, orange], borderRadius: 6 }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      title: { display: true, text: 'Стоимость строительства в Грузии (данные резидента, апр.2026)' }
-    },
-    scales: { y: { beginAtZero: true, max: 900, title: { display: true, text: '$/м²' } } }
-  }
-});
-
-// 14. Developer economics: cost vs sale price
-new Chart(document.getElementById('cottageDevChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Тбилиси пригород\n(160м²)', 'Гонио\n(180м²)', 'Квариати\n(250м²)'],
-    datasets: [
-      { label: 'Затраты', data: [197200, 241200, 386750], backgroundColor: [lightBlue, lightBlue, lightBlue], borderRadius: 4 },
-      { label: 'Цена продажи', data: [224000, 324000, 500000], backgroundColor: [blue, orange, green], borderRadius: 4 }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { position: 'top' } },
-    scales: { y: { beginAtZero: true, title: { display: true, text: '$' },
-      ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K' } } }
-  }
-});
-
-// 15. Net yield comparison: apartment vs cottage
-new Chart(document.getElementById('cottageYieldChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Кв-ра LTR\nТбилиси', 'Кв-ра STR\nТбилиси', 'Кв-ра STR\nБатуми', 'Коттедж LTR\nТбилиси', 'Коттедж STR\nГонио', 'Вилла STR\nКвариати'],
-    datasets: [{
-      label: 'Net yield %',
-      data: [6.0, 4.9, 4.2, 6.8, 3.7, 3.3],
-      backgroundColor: [blue, blue, blue, orange, orange, orange],
-      borderRadius: 4
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { display: false },
-      annotation: {
-        annotations: {
-          refLine: { type: 'line', yMin: 6.0, yMax: 6.0, borderColor: green, borderWidth: 2, borderDash: [5,3],
-            label: { content: 'Кв-ра LTR 6.0%', display: true, position: 'end', font: { size: 9 }, color: green } }
-        }
-      }
-    },
-    scales: { y: { beginAtZero: true, max: 9, title: { display: true, text: 'Net yield %' } } }
-  }
-});
-
-// 11. Foreign buyers chart
-new Chart(document.getElementById('foreignBuyersChart'), {
-  type: 'bar',
-  data: {
-    labels: ['Тбилиси', 'Батуми'],
-    datasets: [
-      {
-        label: 'Иностранцы %',
-        data: [21, 84],
-        backgroundColor: [blue, orange],
-        borderRadius: 4
-      },
-      {
-        label: 'Местные %',
-        data: [79, 16],
-        backgroundColor: ['#d0ddf0', '#f0d0c0'],
-        borderRadius: 4
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { position: 'top' } },
-    scales: {
-      x: { stacked: true },
-      y: { stacked: true, max: 100, title: { display: true, text: '%' } }
-    }
-  }
-});
-}
-
 </script>
 </body>
 </html>

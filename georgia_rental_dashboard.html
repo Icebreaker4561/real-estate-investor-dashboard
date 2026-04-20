@@ -35,6 +35,41 @@
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
   @media (max-width: 700px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
 
+  @media (max-width: 480px) {
+    body { font-size: 13px; }
+    h1 { font-size: 18px; }
+    h2 { font-size: 15px; }
+    h3 { font-size: 13px; }
+    header { padding: 14px 14px 12px; }
+    header p { font-size: 11px; }
+    .flag { font-size: 20px; margin-right: 4px; }
+    .kpi-strip { padding: 10px 12px; gap: 6px; }
+    .kpi { flex: 1 1 120px; }
+    .kpi-val { font-size: 18px; }
+    .kpi-label { font-size: 10px; }
+    .kpi-sub { font-size: 10px; }
+    .main { padding: 10px 10px; gap: 12px; }
+    .section { padding: 14px 12px; border-radius: 8px; }
+    .section-title { font-size: 13px; gap: 6px; }
+    .section-tag { font-size: 9px; padding: 2px 6px; }
+    .chart-box canvas { max-height: 200px; }
+    .chart-box-tall canvas { max-height: 240px; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+    th { font-size: 11px; padding: 7px 8px; }
+    td { font-size: 12px; padding: 6px 8px; }
+    .pro-con { grid-template-columns: 1fr; }
+    .pro-col li, .con-col li { font-size: 11px; }
+    .tax-highlight { font-size: 22px; }
+    .tax-card { padding: 10px 8px; }
+    .callout { font-size: 12px; padding: 8px 10px; }
+    .city-card { padding: 12px 10px; }
+    .city-card h4 { font-size: 13px; }
+    .math-row { font-size: 12px; }
+    .badge { font-size: 10px; padding: 2px 6px; }
+    .src-row { font-size: 10px; }
+    footer { font-size: 10px; padding: 14px; }
+  }
+
   .chart-box { position: relative; }
   .chart-box canvas { max-height: 260px; }
   .chart-box-tall canvas { max-height: 340px; }
